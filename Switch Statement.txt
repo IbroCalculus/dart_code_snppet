@@ -1,0 +1,13 @@
+
+ var x = "One"
+
+ switch(x){
+   case "One":
+     print("The value is one");
+     break;
+   case "Two":
+     print("The value is two");
+     break;
+   default:
+     print("Result unknown")
+}

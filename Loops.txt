@@ -1,0 +1,29 @@
+
+=================== FOR LOOP ======================
+
+//i <= list1.length
+
+  for(int i=0; i<=5; i++){
+    print('The value for this iteration is: ' + i.toString());
+    print("This is iteration: ${i}");
+  }
+
+
+================== WHILE LOOP ===================
+
+var x = 0
+while (x != 10){
+   print("The value is not 10")
+   x++;
+}
+
+
+================= DO WHILE LOOP ==========
+
+var x = 0
+
+do {
+  print("It is looping");
+  x++;
+} while (x <= 10)
+  print("Iteration completed!")

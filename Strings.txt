@@ -1,0 +1,10 @@
+
+Accepts both single and double quotes
+
+  for(int i=0; i<=5; i++){
+    print('The value for this iteration is: ' + i.toString());           //Cannot concatenate string and int data type
+    print("This is iteration: ${i}");                                    //Single or double quotes
+  }
+
+
+  String fName = "Ibrahim";

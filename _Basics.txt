@@ -1,0 +1,10 @@
+
+ Dart is a programming language that is focused on fronted(mobile apps, web) user interface (UI) development
+
+================= Everything runs within the main function ==========
+//Always end with ;
+
+void main(){
+  print("This is your first dart code");      // OR Single quotation
+  //print("This is your first dart code");    <- How to comment
+}

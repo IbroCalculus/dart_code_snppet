@@ -1,0 +1,91 @@
+
+class Person{
+  String name = 'Max';
+  int age = 46;
+
+  fullName() => print("Your full name is : &{name} &age}
+}
+
+void main(){
+
+  Person p1 = Person();
+  //var p1 = Person();
+  print(p1.name);
+
+  p1.name = "James";
+  p1.age = 56;
+  p1.fullName()
+
+}
+
+
+==================== CONSTRUCTOR ========================
+
+class Person{
+  String name = "";
+  int age = 0;
+
+
+  Person(){
+   print("Your name is ${this.name}, and age is ${this.age});
+}
+
+  Person(String name, int age){
+   print("Your name is ${name}, and age is ${age});
+}
+
+
+}
+
+void main(){
+
+  var p1 = Person("Ibrahim", 34);
+  print(p1.age);
+}
+
+-------- USING NAMED ARGUMENTS ------------
+
+void main(){
+  var person1 = Person(age: 56, fName: "Ibrahim");
+}
+
+class Person{
+  String fName;
+  int age;
+  String nickName;
+
+  Person({required this.fName, required this.age, this.nickName = "Nicki"}){
+    print("You are welcome Mr ${this.fName}, whose nickname is ${this.nickName}");
+  }
+}
+
+
+==================== INHERITANCE ===================
+void main(){
+  User user1 = User("Ibrahim", 45);
+  SuperUser superUser1 = SuperUser("username1", 56);
+  superUser1.puplish();
+  
+}
+
+class User {
+  String username = '';
+  int age = 1;
+
+  User(String username, int age) {
+    this.username = username;
+    this.age = age;
+
+    void login() {
+      print("User logged in successfully");
+    }
+  }
+}
+
+class SuperUser extends User{
+  SuperUser(String username, int age) : super(username, age);
+
+  void puplish(){
+    print("Publish update");
+  }
+ }

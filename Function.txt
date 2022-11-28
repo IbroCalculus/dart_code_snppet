@@ -1,0 +1,41 @@
+
+========================= FUNCTION RETURN VOID ===========================
+void testFunction(){
+  print("This is a test function");
+}
+
+void sampleF() => print("This is a sample project");  //Only use when statement is 1 line
+String greet() => "Welcome";                          // Return Welcome
+String greet(String firstName) => "You are welcome aboard Mr $firstName";
+
+void main(){
+  for(int i=0; i<=5; i++){
+     testFunction();
+    sampleF()
+  }
+}
+
+
+========================= FUNCTION WITH PARAMETER==========================
+void testFunction(String i, int age){           //The data type may be ignored, but better the use it.
+  print('You are welcome Mr ${i}, you are ${age} years old');
+}
+
+void main(){
+  for(int i=0; i<=5; i++){
+    testFunction("Ibrahim", 40);
+  }
+}
+
+
+========================== FUNCTION WITH RETURN =================
+String testFunction(String i, int age){
+  String x = 'You are welcome Mr ${i}, you are ${age} years old';
+  return x;
+}
+
+void main(){
+  String msg = testFunction("Ibrahim", 57);
+  print(">>>>: ${msg}");
+}
+

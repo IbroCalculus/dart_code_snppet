@@ -1,0 +1,13 @@
+
+  var fullName;
+  dynamic firstName;    //Same as var
+  int age;
+  double temp;
+  const firstName = "Ibrahim";                 //Constant
+  final fullName;
+  fullName = "Ibrahim Musa Suleiman";    //Keyword like constant. Declare and assign constant later.
+
+  var fName = "Ibrhaim";   // Does not specify a datatype
+  String sName = "Suleiman";   //String datatype variable
+
+  print("You are Welcome Mr ${fName} ${sName}");
