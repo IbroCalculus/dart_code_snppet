@@ -2,3 +2,10 @@
 
   int x = 34567;
   String y = x.toString();
+
+  String x = "234";
+  int y = int.parse(x);
+
+----- Down casting -----
+  num age = 20;
+  int age2 = age as int;

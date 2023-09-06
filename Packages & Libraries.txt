@@ -1,0 +1,19 @@
+NB: The website 'pub.dev' is the official package repository for Dart and Flutter apps.
+
+
+import 'dart:math' as math;		//Built-in package. CHECK Math.txt
+
+  var maxVal = math.max(34, 66);
+  print("The maximum of both is: ${maxVal}");
+
+  print("PI: ${math.pi}");
+
+
+
+================== USING EXTERNAL LIBRARIES / DEPENDENCIIES =================
+Create, if not exists, 'pubspec.yaml' file.
+It is similar to mainfest file in android studio, we also add dependencies like within gradle file.
+
+.yaml is a markup file where things are defined by spaces, rather than curly brackets as used in many programming languages. 
+
+

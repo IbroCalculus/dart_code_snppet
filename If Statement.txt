@@ -1,3 +1,5 @@
+SIMILARYLY, Ternary Operator.txt
+
 
 var num1 = 5
 var num2 = 6

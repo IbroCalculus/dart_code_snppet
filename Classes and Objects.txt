@@ -1,4 +1,28 @@
+CHECK ALSO: Abstract class.txt and Interface.txt
 
+NB: If class 'User' is located in file 'user.dart', To use it within the file main.dart, do...
+
+class User {
+  var fName;
+  var _sName;
+  var _age;
+
+  void sayHello() {
+    print("Hello user!");
+  }
+}
+
+----- in main.dart -----
+import 'user.dart';			// This auto imports, if not, then do manually
+
+void main() {
+  User user = new User();	//the keyword 'new' is negligible
+  user.fName = "Ibrahim";
+  user.sayHello();
+}
+
+
+==========================CLASSES AND OBJECT =====================================
 class Person{
   String name = 'Max';
   int age = 46;
@@ -20,6 +44,8 @@ void main(){
 
 
 ==================== CONSTRUCTOR ========================
+Dart support constructor overloading, but not slightly different from other languages.
+Check below for overloading constructor
 
 class Person{
   String name = "";
@@ -31,9 +57,12 @@ class Person{
 }
 
   Person(String name, int age){
-   print("Your name is ${name}, and age is ${age});
+    this.name = name;
+    this.age = age;
 }
-
+ 
+  --- Alternatively ---
+  Person(this.name, this.age);
 
 }
 
@@ -42,6 +71,23 @@ void main(){
   var p1 = Person("Ibrahim", 34);
   print(p1.age);
 }
+
+-------- OVERLOADING CONSTRUCTOR ------------
+
+class Person {
+  String firstName;
+  String? lastName;
+  int? age;
+
+  Person(this.firstName, this.lastName);  // Default constructor
+  Person.withAge(this.firstName, this.lastName, this.age);  // Constructor overloading
+  Person.withOnlyFirstName(this.firstName);  // Constructor overloading
+}
+
+  Person person = Person("Ibrahim", "Suleiman");
+  Person person2 = Person.withAge("Ibrahim", "Musa", 19);
+  Person person3 = Person.withOnlyFirstName("Yakubu");
+
 
 -------- USING NAMED ARGUMENTS ------------
 
@@ -89,3 +135,16 @@ class SuperUser extends User{
     print("Publish update");
   }
  }
+
+
+==================== STATIC KEYWORD ===================
+class MyClass {
+  static int staticVariable = 42;
+  static double PI = 3.142;
+
+  static void staticMethod() {
+    print("This is a static method.");
+  }
+}
+
+  print(MyClass.PI);

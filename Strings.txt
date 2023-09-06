@@ -1,10 +1,39 @@
 
-Accepts both single and double quotes
+Accepts both single and double quotes. Single is recommended.
+
+---- Concatenation ----
+
+  var fName = "Ibrahim";
+  var sName = "Suleiman";
+
+  print("Welcome " + fName + ' ' + sName);  //String concatenation
+  print("Welcome $fName $sName");           //Known as string interpolation
 
   for(int i=0; i<=5; i++){
     print('The value for this iteration is: ' + i.toString());           //Cannot concatenate string and int data type
-    print("This is iteration: ${i}");                                    //Single or double quotes
+    print("This is iteration: ${i}");                                    //Single or double quotes. Known as string interpolation.
   }
 
 
+---- Multiline ----
+
+  String multiLine = """
+  This is 
+    a multiline
+              string
+""";
+
+
+============= String lenth ==============
   String fName = "Ibrahim";
+  print(fName.length);
+
+
+============= Unicode value of String ===========
+
+  var a = "A";
+  var word = "Hello";
+  print(a.codeUnitAt(0));        //OUTPUT: 65
+  print(a.codeUnits);            //OUTPUT: [65]
+  print(word.codeUnits);         //OUTPUT: [72, 101, 108, 108, 111]
+  print(word.codeUnitAt(1));     //OUTPUT: 101

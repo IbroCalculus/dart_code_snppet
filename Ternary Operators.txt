@@ -1,0 +1,5 @@
+
+
+  var weather = "rainy";
+  String response = (weather == "rainy") ? "Yes, It is rainy" : "No, it is sunny";
+  print(response);

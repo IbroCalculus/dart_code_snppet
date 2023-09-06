@@ -1,0 +1,7 @@
+
+  Set myList  = <String>{"One","Two","Three","Four","Five","Three","Four"};
+  print(myList);
+  print(myList.length);
+
+------------- If set contains a particular value -----------
+  print(myList.contains("Three"));

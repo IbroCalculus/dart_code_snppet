@@ -1,0 +1,26 @@
+
+enum SocialMedia {
+  facebook,
+  WhatsApp,
+  YouTube,
+}
+
+void main() {
+  SocialMedia socialMedia = SocialMedia.YouTube;
+  print(socialMedia.index);		// returns index of that object.
+
+  switch (socialMedia) {
+    case SocialMedia.WhatsApp:
+      print("WhatsApp");
+      break;
+    case SocialMedia.YouTube:
+      print("YouTube");
+      break;
+    case SocialMedia.facebook:
+      print("Facebook");
+      break;
+    default:
+      print("None of the above!");
+  }
+}
+

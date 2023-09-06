@@ -1,0 +1,16 @@
+
+  try{
+    print(4/0);
+  }on FormatException catch(e) {
+    print("A format exception occurred");
+  }on TypeError {
+    print("A type error occurred");
+  }on Exception catch(e){
+    print("Exception exception occurred");
+  }catch(e)
+  {
+    print(e);
+  }
+  finally{
+    print("All done");
+  }

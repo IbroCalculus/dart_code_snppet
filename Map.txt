@@ -1,0 +1,26 @@
+
+  Map<String, String> details = {
+    "fName" : "Ibrahim",
+    "sName" : "Suleiman"
+  };
+
+---------- ACCESSING ELEMENTS IN A MAP -----------
+  print(details["fName"]);
+
+---------- REMOVING ELEMENTS FROM A MAP ---------
+  details.remove("sName");
+
+
+---------- GETTING THE KEYS AND VALUES ------------
+  print(details.keys);
+  print(details.values);
+
+
+---------- LOOPING THROUGH A MAP ------------
+  for(var value in details.values){
+    print("Value: $value");
+  }
+
+  for(var keyItem in details.keys){
+    print("$keyItem: ${details[keyItem]}");
+  }

@@ -1,0 +1,59 @@
+Futures are used to handle things that may complete in the future, which will produce either a result or failure
+
+import 'package:http/http.dart' as http;
+
+void main() {
+
+  // GET Request
+  var response = http.get(Uri.parse("https://coffee.alexflipnotee.dev/random.json"));
+  response.then((value){
+    print(value.body);
+    print("========================== 1. ==========================================");
+    var res = jsonDecode(value.body); // Return a json String
+    print(res);
+    print("========================== 2. ==========================================");
+    print(res['address']);
+    print("========================== 3. ==========================================");
+    print(res['address']['zipcode']);
+  }).onError((error, stackTrace) {
+    print("Error occured fetching data from API");
+    print(error);
+    print(stackTrace);
+  }
+  );
+  print(response);
+}
+
+
+=================================== E.g 2 ======================================
+
+------------------ API data (https://jsonplaceholder.typicode.com/users) ---------------------
+[
+  {
+    "id": 1,
+    "name": "Leanne Graham",
+    "username": "Bret",
+    "email": "Sincere@april.biz",
+    "address": {
+      "street": "Kulas Light",
+      "suite": "Apt. 556",
+      "city": "Gwenborough",
+      "zipcode": "92998-3874",
+      "geo": {
+        "lat": "-37.3159",
+        "lng": "81.1496"
+      }
+    },
+    "phone": "1-770-736-8031 x56442",
+    "website": "hildegard.org",
+    "company": {
+      "name": "Romaguera-Crona",
+      "catchPhrase": "Multi-layered client-server neural-net",
+      "bs": "harness real-time e-markets"
+    }
+  },
+
+
+
+
+

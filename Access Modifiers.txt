@@ -1,0 +1,5 @@
+In Java, we can use public, protected, default and private.
+
+But in dart, we can use only public or private. every variable is public by default, to make private, use _. 
+E.g var _fName, String _username; ...
+

@@ -27,6 +27,28 @@ void main(){
   }
 }
 
+========================= FUNCTION WITH OPTIONAL PARAMETER(s)==========================
+
+void identity(String fName, [String? mName, String? sName]) {
+
+  if (mName == null && sName == null) {
+    print("Your first name is ${fName}");
+  } else {
+    print("Welcome ${fName} ${mName} ${sName}");
+  }
+}
+
+  identity("Ibrahim");
+  identity("John", "Maxi", "Doe");
+
+
+========================= FUNCTION WITH DEFAULT PARAMETER(s) VALUES ==========================
+
+void identity2(String mName, [String fName = "firstName", String sName = "surname"]) {
+  print("Customer info: ${fName} ${mName} ${sName}");
+}
+  identity2("middleTon");
+
 
 ========================== FUNCTION WITH RETURN =================
 String testFunction(String i, int age){

@@ -4,6 +4,7 @@
   List myList = ["One","Two","Three","Four","Five"];             //This can accept multiple datatypes elements
 
   List<String> myList  = ["One","Two","Three","Four","Five"];    //This accepts only string datatypes
+  List myList  = <String>["One","Two","Three","Four","Five"];
 
   print(myList[0]);
   print(myList.elementAt(2));
@@ -16,3 +17,19 @@
 
 ============ REMOVE ELEMENT FROM A LIST ==========
   myList.remove("Two");    //Removes a single element
+  myList.removeAt(1);
+
+============ INDEX OF AN ELEMENT FROM A LIST ==========
+  print(myList.indexOf("Two"));
+
+============ INSERT ELEMENT TO A LIST ==========
+  myList.insert(0, "New One");
+
+
+============= LOOPING THROUGH A LIST (using for each) =============
+  for (var item in myList){
+    print(item);
+  }
+
+============= If list contains a particular value =============
+  print(myList.contains("Three"));

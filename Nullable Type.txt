@@ -1,0 +1,14 @@
+====== Making a value nullable =====
+
+  int? money = null;
+
+  String? fullName;
+
+  // print(fullName.length)  	//This will not compile because of null check
+  // print(fullName?.length);   // Same as; if(fullName == null) return null, else return the value of fullName.length
+  print(fullName!.length);  	// Same as; if(fullName != null) print(fullName.length). Used when your are certain the value is not null
+
+  String? fullName;
+  int nameLength = fullName?.length ?? 0;   //if(fullName == null) return 0, else return value of fullName.length
+  print(nameLength);
+

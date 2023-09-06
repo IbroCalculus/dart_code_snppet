@@ -1,0 +1,25 @@
+abstract class Content{
+  final String title;
+
+  Content(this.title);
+  void publish();		// Abstract method;
+  void publish2(){
+    print("publish2 method within abstract class. Can't override");
+  }
+}
+
+class Post extends Content{
+  Post(super.title);
+
+  @override
+  void publish() {
+    print("Overrided publish for Post class");
+  } 
+  
+}
+
+void main(){
+  var post1 = Post("This is an object of post");
+  post1.publish();
+  post1.publish2();  
+}

@@ -1,0 +1,57 @@
+============= ENCAPSULATION ===============
+
+NB: They are 2 ways of using getters and setters. the one with 'set' and 'get' keyword is the official method for dart.
+    (Use inteliJ generate getter and setter method, within setter bracket, manually add var except if intelij later version do.)
+NB: the variables are declared as private (ie _fName).
+
+-------------- in user.dart (All the variables are declared as private) ---------------
+class User {
+  var _fName;
+  var _sName;
+  var _age;
+
+  set fName(var _fName) {
+    this._fName = _fName;
+  }
+
+  String get fName {	//This can also be; get fName => _fName;
+    return _fName;
+  }
+
+  void setSname(var _sName) {
+    this._sName = _sName;
+  }
+
+  String getSname() {
+    return this._sName;
+  }
+
+  void setAge(var _age) {
+    this._age = _age;
+  }
+
+  int getAge() {
+    return this._age;
+  }
+
+  void sayHello() {
+    print("Hello user!");
+  }
+}
+
+NB: When using intelij generate setter method, manual add the 'var' keyword within the bracket. ie; set likes(var value)
+
+-------------- in main.dart ---------------
+
+import 'user.dart';
+
+void main() {
+  User user = new User();
+  user.fName = "Calculus";
+  user.setSname("Musa");
+  user.setAge(55);
+
+  print("First Name: " + user.fName);
+  print("Surname: " + user.getSname());
+  print("Age: ${user.getAge()}");
+}

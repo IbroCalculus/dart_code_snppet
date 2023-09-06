@@ -1,0 +1,20 @@
+API keys provides 2 basic functions:
+
+-1. Client App Identification: Identify applications that make API calls.
+-2. Client App Authorizaition: Check whether the calling applicaition have been granted access to the API servers.
+   E.g: If API key is invalid, the API server can simply block access of the client application
+
+------------------------------------------------------------------------------------------------------------
+dependencies:
+  http: ^1.1.0
+
+--------------------- main.dart -------------------------------------
+import 'package:http/http.dart' as http;
+
+void main() {
+  
+  // GET Request
+  var response = http.get(Uri.parse("https://coffee.alexflipnote.dev/random.json"));
+  print(response);
+
+}

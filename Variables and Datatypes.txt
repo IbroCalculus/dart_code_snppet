@@ -1,13 +1,62 @@
+CHECK ALSO, Access Modifiers.txt
 
-  var fullName;
-  dynamic firstName;    //Same as var
+NB: Const vs final:
+  final age = 25;
+  const x = 10;
+
+const is used when value is known at compile time, while final is used when value is known at runtime.
+  const date = DateTime.now();	// Error. The value of date is known only at runtime
+  final date = DateTime.now();	// Correct
+
+----------------------------------------------------------------------------------------------------------
+  var fullName;		// You can use var in place of specifying the data type.
+  dynamic firstName;    // With dynamic, declare a datatype, and later reassign a different datatype.
+
+E.g:
+  dynamic f = "Hello";
+  f = 45;
+  f = true;
+The above will give an error for var. For var, we cannot reassign a different datatype, but the same datatype.
+NB: A variable declared as var without a datatype, is by default dynamic. E.g:
+  var x;
+  x = false;
+  x = "Hello";
+  x = 345;
+
   int age;
   double temp;
-  const firstName = "Ibrahim";                 //Constant
-  final fullName;
+  num myNumber = 123443;		// NB: num datatype can hold either int or double value.
+
+  String fName = "Ibrahim M.";
+  bool b = true;
+  const firstName = "Ibrahim";                 // Constant
+  final fullName;			       // Same as above (technical differences)
   fullName = "Ibrahim Musa Suleiman";    //Keyword like constant. Declare and assign constant later.
 
   var fName = "Ibrhaim";   // Does not specify a datatype
   String sName = "Suleiman";   //String datatype variable
 
   print("You are Welcome Mr ${fName} ${sName}");
+
+
+==========================  LATE KEYWORD (lazy initialization) ========================
+  final String fName = "Ibrahim";
+  late final String sName;
+
+  sName = "Musa";
+
+
+============================ CHECK DATATYPE ==========================
+
+  dynamic fName = "Ibrahim";
+  dynamic numX = 34;
+  dynamic numY = 67.54;
+
+  print(fName is! int);
+  print(numX is! String);
+  print(numY is Float);		// boolean 
+-----------------------------
+  print(fName.runtimeType);	// String
+  print(numX.runtimeType);	// int
+  print(numY.runtimeType);	// double;
+
