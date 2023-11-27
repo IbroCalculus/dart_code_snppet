@@ -1,0 +1,30 @@
+Use this, will delete the other 2 later.
+
+NB: To declare a variable as private, use the _. ie _username.
+    Only private fields can have getters and setters.
+
+class Person{
+  String _username = "";
+  String _password = "";
+  int _id = 0;
+
+  Person(this._username, this._password, this._id);		// Constructor
+
+  int get id => _id;						// Getters and Setters
+
+  set id(int value) {
+    _id = value;
+  }
+
+  String get password => _password;
+
+  set password(String value) {
+    _password = value;
+  }
+
+  String get username => _username;
+
+  set username(String value) {
+    _username = value;
+  }
+}

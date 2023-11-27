@@ -19,11 +19,17 @@
   myList.remove("Two");    //Removes a single element
   myList.removeAt(1);
 
+
+============ CLEAR A LIST ==========
+  names.clear();
+
 ============ INDEX OF AN ELEMENT FROM A LIST ==========
   print(myList.indexOf("Two"));
 
 ============ INSERT ELEMENT TO A LIST ==========
   myList.insert(0, "New One");
+
+============ CHECK IF A LIST IS EMPTY ==========
 
 
 ============= LOOPING THROUGH A LIST (using for each) =============
@@ -33,3 +39,13 @@
 
 ============= If list contains a particular value =============
   print(myList.contains("Three"));
+
+===== Other methods =======
+  print(users.isEmpty);
+  print(users.first);
+  print(users.last);
+
+
+============================= Dynamic List ==================================
+
+  List numbers = List.generate(20, (index) => print("Iteration Number: $index"));

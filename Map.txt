@@ -4,8 +4,13 @@
     "sName" : "Suleiman"
   };
 
+  Map<String, String> countriesCaptitals = Map();	// Declaring an empty map.
+
 ---------- ACCESSING ELEMENTS IN A MAP -----------
   print(details["fName"]);
+
+---------- ADDING ELEMENTS TO A MAP -----------
+  details["age"] = "56";
 
 ---------- REMOVING ELEMENTS FROM A MAP ---------
   details.remove("sName");

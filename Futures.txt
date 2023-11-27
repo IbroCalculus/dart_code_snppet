@@ -1,3 +1,70 @@
+Future is used for calling a function that needs some time to process and give result in the future. At the same time, the app can do other things,
+
+* Example of when Future is used:
+- Network mocking
+- http request
+- Shared preferences.
+
+==== 1. Using  Future for calling function ===
+
+void myFunction(){
+  print("The is myFunction");
+}
+
+Future sampleFuture() async {
+  return Future.delayed(Duration(seconds: 3), () {
+    print("This runs after 3 seconds");
+  },);
+}
+
+Future<String> sampleFuture2() async  {
+  print("This is from sampleFuture2");				// This will happen immediately
+  return Future.delayed(Duration(seconds: 7), () {
+    return "This runs after 7 seconds";
+  });
+}
+
+
+main(List<String> arguments) async {		NB: asyn
+
+
+  sampleFuture();					// This will execute after 3 seconds
+  sample1();						// This will execute immediately
+
+  String result = await sampleFuture2();		// Using return with Future
+  print("The value of result is: $result");
+
+
+--------- Using then, catchEorror, and whenComplete ---------
+
+Future<String> sampleFuture2() async {
+  print("This is from sampleFuture2");
+  return Future.delayed(Duration(seconds: 7), () {
+    return "This runs after 7 seconds";
+  }).catchError((){
+    print("An error occurred");
+  });
+}
+
+
+
+=============================================================================
+
+  print("Hello");
+  // sleep(Duration(seconds: 5));                 // This happens synchronously, while Future below is asynchronous
+  Future.delayed(Duration(seconds: 5), () {
+    print("This is from Future, 5 seconds later!");
+  });
+  print("5 seconds later");
+
+
+==== 1. Using  Future for network call ===
+CHECK: API.txt
+
+
+
+
+===========================================================================================================================================================
 Futures are used to handle things that may complete in the future, which will produce either a result or failure
 
 import 'package:http/http.dart' as http;

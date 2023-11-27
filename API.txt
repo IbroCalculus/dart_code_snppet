@@ -12,6 +12,66 @@ dependencies:
 import 'package:http/http.dart' as http;
 
 void main() {
+  fetchData();
+}
+
+void fetchData() async {
+  var response = await http.get(Uri.parse("https://coffee.alexflipnote.dev/random.json"));
+  if (response.statusCode == 200) {
+    // If the request to the API was successful, parse the JSON response.
+    print(response.body);
+  } else {
+    // If the server did not return a 200 OK response, throw an exception.
+    throw Exception('Failed to load data from the API');
+  }
+}
+
+
+------------- Similarly (Getting a list of data) --------------------
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void fetchData() async {
+  var response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
+  if (response.statusCode == 200) {
+    // If the request to the API was successful, parse the JSON response.
+    List<dynamic> data = json.decode(response.body);
+
+    for (var item in data) {
+      int userId = item['userId'];
+      int id = item['id'];
+      String title = item['title'];
+      String body = item['body'];
+
+      print('UserId: $userId');
+      print('Id: $id');
+      print('Title: $title');
+      print('Body: $body');
+      print(''); // Add a newline for separation
+    }
+    print('Number of items: ${data.length}');
+
+  } else {
+    // If the server did not return a 200 OK response, throw an exception.
+    throw Exception('Failed to load data from the API');
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void main() {
   
   // GET Request
   var response = http.get(Uri.parse("https://coffee.alexflipnote.dev/random.json"));
