@@ -1,4 +1,4 @@
-CHECK ALSO: Abstract class.txt and Interface.txt
+CHECK ALSO: Abstract class.txt and Interface.txt, Mixins.txt
 
 NB: If class 'User' is located in file 'user.dart', To use it within the file main.dart, do...
 

@@ -30,12 +30,17 @@
   myList.insert(0, "New One");
 
 ============ CHECK IF A LIST IS EMPTY ==========
+  myList.isEmpty;
 
-
-============= LOOPING THROUGH A LIST (using for each) =============
+============= LOOPING THROUGH A LIST (using For loop) =============
   for (var item in myList){
     print(item);
   }
+
+============= LOOPING THROUGH A LIST (using forEach loop) =============
+  items.forEach((element) {
+    print(element);
+  });
 
 ============= If list contains a particular value =============
   print(myList.contains("Three"));

@@ -14,3 +14,13 @@
   finally{
     print("All done");
   }
+
+============================ THROW EXCEPTIONS ====================
+
+  print("Enter a first name: ");
+  var fName = stdin.readLineSync()!;
+  if(fName.startsWith("I")){
+    throw Exception("Name cannot begin with I");
+  }else{
+    print("Welcome $fName");
+  }

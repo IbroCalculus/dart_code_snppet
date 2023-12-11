@@ -1,7 +1,20 @@
 
-  Set myList  = <String>{"One","Two","Three","Four","Five","Three","Four"};
-  print(myList);
-  print(myList.length);
+  Set names = {"Ibro","ibro","Aboy"};
+  print(names);
+  print(names.length);
+
+ 
+==== NB: Set is case sensitive. ie; Ab is not same as ab. To do otherwise, use the method below; ====
+
+  Set<String> names = LinkedHashSet<String>(
+    equals: (a, b) => a.toLowerCase() == b.toLowerCase(),
+    hashCode: (o) => o.toLowerCase().hashCode,
+  );
+
+  names.addAll(["Ibro", "ibro", "Aboy"]);
+  print(names); // Output: {Ibro, Aboy}
+
+
 
 ------------- If set contains a particular value -----------
   print(myList.contains("Three"));

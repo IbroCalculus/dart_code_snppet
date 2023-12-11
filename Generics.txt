@@ -1,0 +1,26 @@
+
+
+ 
+====================================== GENERIC METHOD ==========================================
+
+------------------------------------------ Method return void ------------------------------------
+E.g 1:
+  // Pass in any datatype
+
+  welcome(45);
+  welcome("Somebody");
+  welcome('C');
+
+void welcome<T> (T t){
+  print("welcome $t");
+}
+
+	------------------------------------
+E.g 2:
+  id("Ibrahim", 34);
+  id("Ibrahim", "Suleiman");
+  id(123, 456);
+
+void id<T1, T2>(T1 t1, T2 t2) {
+  print("ValA: $t1 ValB: $t2");
+}

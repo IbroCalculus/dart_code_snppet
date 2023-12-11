@@ -1,5 +1,5 @@
 
-  Map<String, String> details = {
+  Map<String, String> details = {		// <String, String> is optional
     "fName" : "Ibrahim",
     "sName" : "Suleiman"
   };
@@ -20,6 +20,12 @@
   print(details.keys);
   print(details.values);
 
+---------- IF MAP CONTAINS A PARTICULAR KEY OR VALUE -----------
+  print(userData.containsKey("username"));
+  print(userData.containsValue(12345));
+
+---------- REMOVE A PARTICULAR KEY -----------
+  userData.remove("username");
 
 ---------- LOOPING THROUGH A MAP ------------
   for(var value in details.values){
