@@ -1,126 +1,87 @@
-Future is used for calling a function that needs some time to process and give result in the future. At the same time, the app can do other things,
+Futures in dart, are like Promises in JavaScript. They represent the result of an asynchronouse task that takes some time to complete.
+They have 2 states. The uncompleted state, which is from when the request is made, until when it is still being processed, and the completed state, which is when the request is done processing and returned either a resolved or an error if something goes wrong.
 
-* Example of when Future is used:
-- Network mocking
-- http request
-- Shared preferences.
+In other words:
+A Future represents a value that will be available at some point in the future. It's like a promise that a value or an error will be provided later. Futures are used for operations that take time to complete, such as:
 
-==== 1. Using  Future for calling function ===
+Fetching data from the internet
+Reading a file
+Waiting for a user action
 
-void myFunction(){
-  print("The is myFunction");
+** How Does a Future Work?
+Creating a Future: You create a Future when you have an operation that won't complete immediately.
+
+Completing a Future: The Future completes with either a value (if the operation was successful) or an error (if something went wrong).
+
+Using a Future: You use then, catchError, and whenComplete methods to handle the value or error when the Future completes.
+
+
+==== Example 1 =====
+
+// Simulating a network request that takes 2 seconds to complete
+
+Future<String> fetchUserName() async {
+  await Future.delayed(Duration(seconds: 2)); // Simulating delay
+  return 'John Doe'; // Returning the result
 }
 
-Future sampleFuture() async {
-  return Future.delayed(Duration(seconds: 3), () {
-    print("This runs after 3 seconds");
-  },);
-}
-
-Future<String> sampleFuture2() async  {
-  print("This is from sampleFuture2");				// This will happen immediately
-  return Future.delayed(Duration(seconds: 7), () {
-    return "This runs after 7 seconds";
+void main() {
+  print('Fetching user name...');
+  
+  // Using the Future
+  fetchUserName().then((name) {
+    print('User name: $name');
+  }).catchError((error) {
+    print('Error: $error');
   });
+  
+  print('This message is printed immediately.');
+}
+
+------ OR USE ASYNC and AWAIT INSTEAD ---------
+
+// Future<void> main() async {
+void main() async {
+  print('Fetching user name...');
+
+  try {
+    final post = await fetchUserName();
+    print('User name: $name');
+  } catch (error) {
+    print('Error: $error');
+  }
+
+
+
+
+
+==== Example 2=====
+
+class Post{
+  String title;
+  int userId;
+  Post({required this.title, required this.userId});
 }
 
 
-main(List<String> arguments) async {		NB: asyn
+Future<Post> fetchPost(){
+  const delay = Duration(seconds: 3);
+  return Future.delayed(delay, (){
+    return Post(userId: 123, title: "My post");
 
-
-  sampleFuture();					// This will execute after 3 seconds
-  sample1();						// This will execute immediately
-
-  String result = await sampleFuture2();		// Using return with Future
-  print("The value of result is: $result");
-
-
---------- Using then, catchEorror, and whenComplete ---------
-
-Future<String> sampleFuture2() async {
-  print("This is from sampleFuture2");
-  return Future.delayed(Duration(seconds: 7), () {
-    return "This runs after 7 seconds";
-  }).catchError((){
-    print("An error occurred");
   });
+
 }
 
-
-
-=============================================================================
-
-  print("Hello");
-  // sleep(Duration(seconds: 5));                 // This happens synchronously, while Future below is asynchronous
-  Future.delayed(Duration(seconds: 5), () {
-    print("This is from Future, 5 seconds later!");
-  });
-  print("5 seconds later");
-
-
-==== 1. Using  Future for network call ===
-CHECK: API.txt
-
-
-
-
-===========================================================================================================================================================
-Futures are used to handle things that may complete in the future, which will produce either a result or failure
-
-import 'package:http/http.dart' as http;
 
 void main() {
 
-  // GET Request
-  var response = http.get(Uri.parse("https://coffee.alexflipnotee.dev/random.json"));
-  response.then((value){
-    print(value.body);
-    print("========================== 1. ==========================================");
-    var res = jsonDecode(value.body); // Return a json String
-    print(res);
-    print("========================== 2. ==========================================");
-    print(res['address']);
-    print("========================== 3. ==========================================");
-    print(res['address']['zipcode']);
-  }).onError((error, stackTrace) {
-    print("Error occured fetching data from API");
-    print(error);
-    print(stackTrace);
+  fetchPost().then((post){
+    print(post.title);
+    print(post.userId);
   }
   );
-  print(response);
+
 }
-
-
-=================================== E.g 2 ======================================
-
------------------- API data (https://jsonplaceholder.typicode.com/users) ---------------------
-[
-  {
-    "id": 1,
-    "name": "Leanne Graham",
-    "username": "Bret",
-    "email": "Sincere@april.biz",
-    "address": {
-      "street": "Kulas Light",
-      "suite": "Apt. 556",
-      "city": "Gwenborough",
-      "zipcode": "92998-3874",
-      "geo": {
-        "lat": "-37.3159",
-        "lng": "81.1496"
-      }
-    },
-    "phone": "1-770-736-8031 x56442",
-    "website": "hildegard.org",
-    "company": {
-      "name": "Romaguera-Crona",
-      "catchPhrase": "Multi-layered client-server neural-net",
-      "bs": "harness real-time e-markets"
-    }
-  },
-
-
-
 
 

@@ -1,6 +1,8 @@
 
+CHECK ALSO: Callback funtions.txt
+
 ========================= FUNCTION RETURN VOID ===========================
-void testFunction(){
+void testFunction(){					// void keyword may be omitted
   print("This is a test function");
 }
 
@@ -8,26 +10,18 @@ void sampleF() => print("This is a sample project");  //Only use when statement 
 String greet() => "Welcome";                          // Return Welcome
 String greet(String firstName) => "You are welcome aboard Mr $firstName";
 
-void main(){
-  for(int i=0; i<=5; i++){
-     testFunction();
-    sampleF()
-  }
-}
 
 
-========================= FUNCTION WITH PARAMETER==========================
-void testFunction(String i, int age){           //The data type may be ignored, but better the use it.
+========================= FUNCTION WITH POSITIONAL PARAMETER ==========================
+void testFunction(String i, int age){           			//The data type may be ignored, but better the use it.
   print('You are welcome Mr ${i}, you are ${age} years old');
 }
-
-void main(){
-  for(int i=0; i<=5; i++){
     testFunction("Ibrahim", 40);
-  }
-}
 
-========================= FUNCTION WITH OPTIONAL PARAMETER(s)==========================
+
+
+========================= FUNCTION WITH OPTIONAL POSITIONAL PARAMETER(s)==========================
+NB: I believe using named parameters below seems better
 
 void identity(String fName, [String? mName, String? sName]) {
 
@@ -42,7 +36,7 @@ void identity(String fName, [String? mName, String? sName]) {
   identity("John", "Maxi", "Doe");
 
 
-========================= FUNCTION WITH DEFAULT PARAMETER(s) VALUES ==========================
+========================= FUNCTION WITH DEFAULT POSITIONAL PARAMETER(s) VALUES ==========================
 
 void identity2(String mName, [String fName = "firstName", String sName = "surname"]) {
   print("Customer info: ${fName} ${mName} ${sName}");
@@ -50,16 +44,37 @@ void identity2(String mName, [String fName = "firstName", String sName = "surnam
   identity2("middleTon");
 
 
-========================== FUNCTION WITH RETURN =================
-String testFunction(String i, int age){
-  String x = 'You are welcome Mr ${i}, you are ${age} years old';
-  return x;
-}
 
-void main(){
-  String msg = testFunction("Ibrahim", 57);
-  print(">>>>: ${msg}");
-}
+========================== FUNCTION WITH NAMED PARAMETER =================
+NB: Every named parameter is optional unless specifically stated by making it required.
+
+-------------- A. Optional ---------------
+  void namedOptional({String? fName, int? age, String? sName})			// OR Ignore datatype which will also ignore need for ?
+  {
+    print("$fName $sName $age");
+  }
+
+  namedOptional(sName: "Doe", fName: "John", age: 45);
+  namedOptional(sName: "Doe", fName: "John");
 
 
-========================== FUNCTION AS A PARAMETER =================
+-------------- B. Required ---------------
+
+  void namedRequired({required String fName, required int age, String? sName})
+  {
+    print("$fName $sName $age");
+  }
+
+  namedRequired(sName: "Doe", fName: "John", age: 45);
+  namedRequired(fName: "Doe", age: 33);
+
+
+--------- Another example (Both optional and required) ------------
+
+String welcome({int? age, required String fName, required String sName}) {
+  return  (age == null) ? "Welcome $fName $sName " : "Welcome $fName $sName $age";
+  }
+
+  var response1 = welcome(fName: "Ibrahim", sName: "Suleiman");
+  var response2 = welcome(fName: "John", sName: "Doe", age: 67);
+

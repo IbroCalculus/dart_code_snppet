@@ -1,0 +1,23 @@
+
+class Person{
+  var _fName;
+  var _sName;
+  var _age;
+
+  static var salary = 4567;
+
+  static void anotherHello(){
+    print('Another hello');
+  }
+
+}
+
+
+------------------------------------------------
+
+void main() {
+
+  print("Amount: ${person.amount}");
+  Person.anotherHello();
+
+}

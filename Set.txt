@@ -15,6 +15,37 @@
   print(names); // Output: {Ibro, Aboy}
 
 
-
 ------------- If set contains a particular value -----------
   print(myList.contains("Three"));
+
+
+=========================== SET OF A CLASS's OBJECT ==================
+
+class Person{
+  String? fName;
+  String? lName;
+  Person(this.fName, this.lName);
+
+
+---- These additional codes will let it function properly when used in a set ---
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Person &&
+        other.fName == fName &&
+        other.lName == lName;
+  }
+
+  @override
+  int get hashCode => fName.hashCode ^ lName.hashCode;
+}
+------
+
+
+  Set<Person> people = <Person>{};
+  people.add(Person("John", "Doe"));
+  people.add(Person("Jane", "Doe"));
+  people.add(Person("John", "Doe"));
+
+  print("Number of people ${people.length}");	// OUTPUT: 2, else would have been 3

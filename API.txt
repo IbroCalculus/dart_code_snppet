@@ -8,23 +8,57 @@ API keys provides 2 basic functions:
 dependencies:
   http: ^1.1.0
 
+
+================== 1. GET REQUEST =====================
+
 --------------------- main.dart -------------------------------------
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
 
 void main() {
   fetchData();
 }
 
+
 void fetchData() async {
-  var response = await http.get(Uri.parse("https://coffee.alexflipnote.dev/random.json"));
+  var response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts/1"));
   if (response.statusCode == 200) {
-    // If the request to the API was successful, parse the JSON response.
-    print(response.body);
+
+    var jsonStringResponse = response.body;			// Even if the response is in json format, response.body returns it as String, hence why json.decode(response.body) below which parses the String to Json.
+    var jsonResponse = json.decode(jsonStringResponse);
+    var postTile = jsonResponse["title"];			// Assuming it's a json data response with a key of "title"
+
+    print("JSON STRING: $jsonStringResponse");
+    print("JSON RESPONSE: $jsonResponse");
+    print("POST TITLE: $postTile");
+
   } else {
     // If the server did not return a 200 OK response, throw an exception.
     throw Exception('Failed to load data from the API');
   }
 }
+
+
+--- Another method to the above ----
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
+
+
+fetchAPIData(){
+  var url = Uri.parse('https://jsonplaceholder.typicode.com/posts/1');
+  http.get(url).then((response) {
+    print(response.body);
+    print(response.headers);
+    print(response.statusCode);
+    print(json.decode(response.body));
+  }).catchError((error) {
+    print(error);
+  });
+}
+
 
 
 ------------- Similarly (Getting a list of data) --------------------
@@ -60,21 +94,60 @@ void fetchData() async {
 
 
 
+================== 2. POST REQUEST =====================
 
+  void _login() async {
 
+    // Prepare the data to be sent
+    Map<String, String> data = {
+      'Email': "testMail@email.com",
+      'Password': "Abcd1234",
+    };
 
+    // Assuming your API endpoint URL
+    var apiUrl = Uri.parse('http://api.ktb.testapi.com/login');
 
+    try {
+      // Make the POST request
+      var response = await http.post(
+        apiUrl,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+      var responseData = json.decode(response.body);
+      // Check the response status
+      if (response.statusCode == 200) {
+        print('Connection successful');
+        if (!mounted) return;
 
+        if (responseData['valid'] == "true") {
+          // Successful login, handle response
+          print('Login successful');
+          print(responseData);
+          print("EmailVerify: ${responseData['EmailVerify']}");
+          print("PaymentStatus: ${responseData['PaymentStatus']}");
 
-
-
-
-
-
-void main() {
-  
-  // GET Request
-  var response = http.get(Uri.parse("https://coffee.alexflipnote.dev/random.json"));
-  print(response);
-
-}
+          if (responseData['EmailVerify'] == null) {
+            Navigator.pushNamed(context, '/verify_email', arguments: _emailController.text);
+            // Navigator.pushNamed(context, '/dashboard');
+            return;
+          } else if (responseData['PaymentStatus'] == 0) {
+            Navigator.pushNamed(context, '/membership_payment', arguments: _emailController.text);
+            return;
+          } else {
+            Navigator.pushNamed(context, '/dashboard');
+          }
+        }
+        // else login failed
+        else {
+          print("Login Failed");
+          CustomAlertDialog.show(context, "Login Failed", "Wrong login credentials, try again", AlertType.warning);
+        }
+      } // end of login check
+    } catch (e) {
+      // Handle network errors or exceptions
+      print('Network error: $e');
+    }
+  }

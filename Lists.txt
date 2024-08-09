@@ -38,7 +38,7 @@
   }
 
 ============= LOOPING THROUGH A LIST (using forEach loop) =============
-  items.forEach((element) {
+  myList.forEach((element) {
     print(element);
   });
 
@@ -50,6 +50,19 @@
   print(users.first);
   print(users.last);
 
+
+====== Using map method on a list =======
+  List<int> numbers = [1,2,3,4,5,6,7,8,9,10];
+  List<int> numbers2 = [];
+  var doubleValue = numbers.map((number) => number*2);  // This returns an iterable
+  numbers2.addAll(doubleValue);
+  print(numbers2);
+
+
+====== Using where (filter) method on a list =======
+  List<int> numbers = [1,2,3,4,5,6,7,8,9,10];
+  var evenValue = numbers.where((number) => number.isEven).toList();
+  print(evenValue);
 
 ============================= Dynamic List ==================================
 
