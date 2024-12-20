@@ -1,4 +1,3 @@
-Use this, will delete the other 2 later.
 
 NB: To declare a variable as private, use the _. ie _username.
     Only private fields can have getters and setters.

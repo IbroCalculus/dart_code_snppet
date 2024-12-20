@@ -7,4 +7,6 @@
 void main(){
   print("This is your first dart code");      // OR Single quotation
   //print("This is your first dart code");    <- How to comment
+    stdout.write("Hello $x, ");		     // Print without newline
+
 }

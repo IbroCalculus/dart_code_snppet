@@ -10,6 +10,14 @@ class User {
   var _sName;
   var _age;
 
+
+  // Named Constructor (CHECK BELOW FOR SIMILAR WHEN VARIABLES ARE DECLARED WITH DATA TYPES INSTEAD OF VAR)
+  User({required String fName, required String sName, required int age}) {
+    this._fName = fName;
+    this._sName = sName;
+    this._age = age;
+  }
+
   set fName(var _fName) {
     this._fName = _fName;
   }
@@ -46,6 +54,8 @@ NB: When using intelij generate setter method, manual add the 'var' keyword with
 import 'user.dart';
 
 void main() {
+
+  User user = User(fName: "John", sName: "Doe", age: 30);
   User user = new User();
   user.fName = "Calculus";
   user.setSname("Musa");
@@ -54,4 +64,18 @@ void main() {
   print("First Name: " + user.fName);
   print("Surname: " + user.getSname());
   print("Age: ${user.getAge()}");
+}
+
+=======================================
+
+class User2 {
+  String _username;
+  String _password;
+  String? _email;
+
+  // Constructor
+  User2({required String username, required String password, String? email})
+      : _username = username,
+        _password = password,
+        _email = email;
 }

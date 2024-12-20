@@ -15,6 +15,22 @@
   print(names); // Output: {Ibro, Aboy}
 
 
+=================== SET OPERATIONS =========================
+
+  var setA = {1, 2, 3, 4};
+  var setB = {3, 4, 5, 6};
+
+  // Union: Combines all unique elements
+  print(setA.union(setB)); // Output: {1, 2, 3, 4, 5, 6}
+
+  // Intersection: Common elements
+  print(setA.intersection(setB)); // Output: {3, 4}
+
+  // Difference: Elements in setA but not in setB
+  print(setA.difference(setB)); // Output: {1, 2}
+
+
+
 
 ------------- If set contains a particular value -----------
   print(myList.contains("Three"));
