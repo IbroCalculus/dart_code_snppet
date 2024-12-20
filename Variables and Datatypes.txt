@@ -60,3 +60,19 @@ NB: A variable declared as var without a datatype, is by default dynamic. E.g:
   print(numX.runtimeType);	// int
   print(numY.runtimeType);	// double;
 
+
+============================ TYPE CASTING =================================
+
+  y = 46;  
+  print(x + y.toString());
+
+  var x = "45";
+  var y = "46";
+  print(int.parse(x) + int.parse(y));
+
+  var w = double.parse(y);
+
+
+
+
+

@@ -4,6 +4,8 @@
   int fNum = int.parse(stdin.readLineSync()!); // Cast string input to int
 
   print("Enter your age: ");
-  var sName = stdin.readLineSync();	 
-
+  var sName = stdin.readLineSync();
   print("Welcome $fName $sName");
+
+----------------------------
+  print("You are welcome ${stdin.readLineSync()}");	 

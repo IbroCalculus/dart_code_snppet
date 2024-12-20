@@ -2,28 +2,97 @@
 NB: To declare a variable as private, use the _. ie _username.
     Only private fields can have getters and setters.
 
+
+
+=====================================================
+
 class Person{
-  String _username = "";
-  String _password = "";
-  int _id = 0;
+  String _fName;
+  String _sName;
+  
+  Person(this._fName, this._sName);  					// If want to pass constructor value as positional argument
 
-  Person(this._username, this._password, this._id);		// Constructor
+  // Person({required String fName, required String sName}) 		// pass value to constructor as named argument
+	: _fName = fName,
+	  _price = price;
 
-  int get id => _id;						// Getters and Setters
+  // Person({this._fName = "One", this.sName = "Two"});			// With default value
 
-  set id(int value) {
-    _id = value;
+
+  String get fName => _fName;
+
+  set fName(String value) {
+    _fName = value;
   }
 
-  String get password => _password;
+  String get sName => _sName;
 
-  set password(String value) {
-    _password = value;
+  set sName(String value) {
+    _sName = value;
   }
 
-  String get username => _username;
+  hello(){
+    return "You are welcome $_fName $_sName";
+  }
 
-  set username(String value) {
-    _username = value;
+  @override
+  String toString() {
+    return 'Person{_fName: $_fName, _sName: $_sName, _age: $_age}';
+  }
+
+
+}
+
+
+-----------------
+
+void main() {
+  var p1 = Person("John", "Doeee");  			// Positional argument constructor
+
+  // var p1 = Person(fName: "John", sName: "Doeee");  	// Named argument constructor
+  print(p1.hello());
+}
+
+
+// ==================== EXAMPLE 2 =====================
+
+class MenuItem{
+  String _title;
+  double _price;
+
+
+  MenuItem({required String title, required double price})
+      : _title = title,
+        _price = price;
+
+  double get price => _price;
+
+  set price(double value) {
+    _price = value;
+  }
+
+  String get title => _title;
+
+  set title(String value) {
+    _title = value;
+  }
+
+  // Custom function
+  void printInfo(){
+    print("The items is $_title, and it costs: $_price");
+  }
+
+  // toString function
+  @override
+  String toString() {
+    return 'MenuItem{_title: $_title, _price: $_price}';
   }
 }
+
+----------------------------------------
+
+  var item1 = MenuItem(title: "Red Beans", price: 5600);
+  print('The items is ${item1.title}, and it costs: ${item1.price}');
+
+  print(item1);
+  item1.printInfo();

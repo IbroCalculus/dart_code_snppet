@@ -108,28 +108,29 @@ class Person{
 
 ==================== INHERITANCE ===================
 void main(){
-  User user1 = User("Ibrahim", 45);
+  var user1 = User("Ibrahim", 45);
   SuperUser superUser1 = SuperUser("username1", 56);
   superUser1.puplish();
   
 }
 
 class User {
-  String username = '';
-  int age = 1;
+  String username;
+  int age;
 
-  User(String username, int age) {
-    this.username = username;
-    this.age = age;
+  User(this.username, this.age);
 
-    void login() {
-      print("User logged in successfully");
-    }
+  void login() {
+    print("User logged in successfully");
   }
 }
 
+
 class SuperUser extends User{
-  SuperUser(String username, int age) : super(username, age);
+  String superUsername;
+
+  SuperUser(this.superUsername, super.username, super.age); 	// Better method
+  // SuperUser(this.superUsername, String username, int age) : super(username, age);
 
   void puplish(){
     print("Publish update");

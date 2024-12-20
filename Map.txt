@@ -5,6 +5,13 @@
   };
 
   Map<String, String> countriesCaptitals = Map();	// Declaring an empty map.
+  Map<String, String> details = {};
+
+  var details = {		
+    "fName" : "Ibrahim",
+    "sName" : "Suleiman"
+  };
+
 
 ---------- ACCESSING ELEMENTS IN A MAP -----------
   print(details["fName"]);
