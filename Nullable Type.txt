@@ -5,13 +5,13 @@
   String? fullName;
 
   // print(fullName.length)  	//This will not compile because of null check
-  // print(fullName?.length);   // Same as; if(fullName != null) return fullName.length, else return null (No error is thrown)
+  // print(fullName?.length);   // Same as; if(fullName == null) return null, else return fullName.length (No error is thrown)
   // print(fullName?.length ?? "A null value, can't get length")		// A way to handle the above. If null, return "A null value, can't get length"
   print(fullName!.length);  	//Used when your are certain the value is not null. Will throw a runtime error if fullName is null.
   // print(fullName!.length ?? "A null value, can't get length")		// This is meaningless, because fullName!.length will throw an error, hence, won't get to after ??
 
   String? fullName;
-  int nameLength = fullName?.length ?? 0;   //if(fullName != null) return fullName.length, else return 0
+  int nameLength = fullName?.length ?? 0;   //if(fullName == null) return 0, else return fullName.length
   print(nameLength);
 
 

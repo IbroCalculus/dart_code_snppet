@@ -74,8 +74,10 @@ class User2 {
   String? _email;
 
   // Constructor
-  User2({required String username, required String password, String? email})
-      : _username = username,
-        _password = password,
-        _email = email;
+  User2({required String username, required String password, String? email}) : _username = username, _password = password, _email = email;
+  User2({required String username, required String password, String? email}) : _username = username, _password = password, _email = email {
+	print("This is the constructor")
 }
+}
+
+

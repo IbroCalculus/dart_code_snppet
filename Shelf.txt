@@ -1,0 +1,103 @@
+dependencies:
+  shelf: ^1.4.2
+
+NB: Execute in cmd: dart filename.dart OR simply through IDE execute button
+
+==================== 1. Simple with just a single route ========================
+
+import 'package:shelf/shelf.dart';
+import 'package:shelf/shelf_io.dart' as shelf_io;
+
+const _hostname = 'localhost';
+const _port = 8080;
+
+void main() async {
+
+  // Define a handler that responds to requests
+  var handler = const Pipeline().addMiddleware(logRequests()).addHandler(_echoRequest);
+
+  // Start server
+  var server = await shelf_io.serve(handler, _hostname, _port);
+
+  // Enable content compression to reduce response size (e.g., gzip).
+  server.autoCompress = true;
+
+  // Print the server address and port to the console.
+  print('Serving at http://${server.address.host}:${server.port}');
+}
+
+
+// A handler function to process incoming requests and return a response.
+Future<Response> _echoRequest(Request request) async {
+  return Response.ok('Request for "${request.url}"');
+}
+
+
+
+
+================= 2. With more routes ======================
+
+import 'package:shelf/shelf.dart';
+import 'package:shelf/shelf_io.dart' as shelf_io;
+
+const _hostname = 'localhost';
+const _port = 8080;
+
+void main() async {
+
+  // Define a handler pipeline with multiple routes
+  var handler = const Pipeline()
+      .addMiddleware(logRequests()) // Middleware to log all requests
+      .addHandler(_routeRequests); // Main router for handling requests
+
+  // Start server
+  var server = await shelf_io.serve(handler, _hostname, _port);
+
+  // Enable content compression to reduce response size (e.g., gzip).
+  server.autoCompress = true;
+
+  // Print the server address and port to the console.
+  print('Serving at http://${server.address.host}:${server.port}');
+}
+
+// Main router to route requests to different handlers
+Future<Response> _routeRequests(Request request) async {
+  switch (request.url.path) {
+    case '':
+      return _echoRequest(request);
+    case 'hello':
+      return _echoRequest2(request);
+    case 'json':
+      return _echoRequest3(request);
+    case 'error':
+      return _echoRequest4(request);
+    default:
+      return Response.notFound('The requested resource was not found.');
+  }
+}
+
+// Handler 1: Responds with a simple message including the request URL
+Future<Response> _echoRequest(Request request) async {
+  return Response.ok('Request forr "${request.url}"');
+}
+
+// Handler 2: Responds with a greeting message
+Future<Response> _echoRequest2(Request request) async {
+  return Response.ok('Hello! Welcome to our server. The request url is ${request.url}');
+}
+
+// Handler 3: Responds with a JSON response
+Future<Response> _echoRequest3(Request request) async {
+  final jsonResponse = {
+    'message': 'This is a JSON response',
+    'status': 'success',
+    'request': request.url.toString()
+  };
+  return Response.ok(jsonResponse.toString(),
+      headers: {'Content-Type': 'application/json'});
+}
+
+// Handler 4: Simulates an error response
+Future<Response> _echoRequest4(Request request) async {
+  return Response.internalServerError(body: 'Oops! Something went wrong.');
+}

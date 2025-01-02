@@ -107,35 +107,82 @@ class Person{
 
 
 ==================== INHERITANCE ===================
-void main(){
-  var user1 = User("Ibrahim", 45);
-  SuperUser superUser1 = SuperUser("username1", 56);
-  superUser1.puplish();
-  
-}
 
-class User {
-  String username;
+class Person {
+  String firstname;
+  String? lastname;
   int age;
 
-  User(this.username, this.age);
+  Person({required this.firstname, this.lastname, required this.age}){
+    print('This the initialization phase');
+  }
 
-  void login() {
-    print("User logged in successfully");
+  void welcomePerson() {
+    print('Hello $firstname $lastname! You are $age years old.');
+  }
+}
+
+****** METHOD 1 OF CREATING AN INHERITANCE (Recommended) *******
+
+import 'person.dart';
+
+class Person2 extends Person {
+  String location;
+  int postalAddress;
+
+  Person2({
+    required super.firstname,
+    super.lastname,
+    required super.age,
+    required this.location,
+    required this.postalAddress,
+  });
+
+  void displayLocation() {
+    print('Location: $location, Postal Address: $postalAddress');
+  }
+
+  @override
+  void welcomePerson() {
+    print("welcome to person2");
+    super.welcomePerson();
+  }
+}
+
+****** METHOD 2 OF CREATING AN INHERITANCE *******
+
+import 'person.dart';
+
+class Person2 extends Person {
+  String location;
+  int postalAddress;
+
+  Person2({
+    required String firstname,
+    String? lastname,
+    required int age,
+    required this.location,
+    required this.postalAddress,
+  }) : super(firstname: firstname, lastname: lastname, age: age);
+
+  void displayLocation() {
+    print('Location: $location, Postal Address: $postalAddress');
+  }
+
+  @override
+  void welcomePerson() {
+    print("welcome to person2");
+    super.welcomePerson();
   }
 }
 
 
-class SuperUser extends User{
-  String superUsername;
+******** USAGE ********
 
-  SuperUser(this.superUsername, super.username, super.age); 	// Better method
-  // SuperUser(this.superUsername, String username, int age) : super(username, age);
+  var p1 = Person(firstname: 'John', lastname: 'Doe', age: 30);
+  var p2_1 = Person2(firstname: 'John', lastname: 'Doe', age:56, location: '123 Main St', postalAddress: 563490);
+  p2_1.welcomePerson();
 
-  void puplish(){
-    print("Publish update");
-  }
- }
 
 
 ==================== STATIC KEYWORD ===================
