@@ -1,87 +1,123 @@
-Futures in dart, are like Promises in JavaScript. They represent the result of an asynchronouse task that takes some time to complete.
-They have 2 states. The uncompleted state, which is from when the request is made, until when it is still being processed, and the completed state, which is when the request is done processing and returned either a resolved or an error if something goes wrong.
 
-In other words:
-A Future represents a value that will be available at some point in the future. It's like a promise that a value or an error will be provided later. Futures are used for operations that take time to complete, such as:
+================== Definitions of Future, Async, Await ===================
 
-Fetching data from the internet
-Reading a file
-Waiting for a user action
+- Future
+A Future represents a value that will exist later. Think of it like a promise of future data
+In other words, A Future<T> means: "I do not have the value now, but I will give you a value of type T later."
+Future<String>: means "A String will arrive later."
 
-** How Does a Future Work?
-Creating a Future: You create a Future when you have an operation that won't complete immediately.
+- Async
+Async means: "This function works with Futures and may pause using await."
+It mainly enables await inside the function.
 
-Completing a Future: The Future completes with either a value (if the operation was successful) or an error (if something went wrong).
+Important Misconception
+  async itself does NOT create delays.  async does NOT make code asynchronous by magic. The Future does that.
 
-Using a Future: You use then, catchError, and whenComplete methods to handle the value or error when the Future completes.
+- Await
+await means "Pause THIS async function until the Future completes."
+E.g: String value = await getData(); Meaning: "Wait here until getData() finishes."
+
+NB: await pauses ONLY the current async function. NOT the whole app. Flutter UI keeps running.
+
+- .then()
+.then() means: "When this Future finishes, run this callback."
 
 
-==== Example 1 =====
 
-// Simulating a network request that takes 2 seconds to complete
+======================== Examples =======================
 
-Future<String> fetchUserName() async {
-  await Future.delayed(Duration(seconds: 2)); // Simulating delay
-  return 'John Doe'; // Returning the result
-}
+---------------- Using Await ------------
 
-void main() {
-  print('Fetching user name...');
-  
-  // Using the Future
-  fetchUserName().then((name) {
-    print('User name: $name');
-  }).catchError((error) {
-    print('Error: $error');
-  });
-  
-  print('This message is printed immediately.');
-}
-
------- OR USE ASYNC and AWAIT INSTEAD ---------
-
-// Future<void> main() async {
 void main() async {
-  print('Fetching user name...');
 
-  try {
-    final post = await fetchUserName();
-    print('User name: $name');
-  } catch (error) {
-    print('Error: $error');
-  }
+  print("Start");
+  String value = await getData();
+  print("Future returned value: ${value}");
+  print("End");
+}
 
-
-
-
-
-==== Example 2=====
-
-class Post{
-  String title;
-  int userId;
-  Post({required this.title, required this.userId});
+Future<String> getData() {
+  return Future.delayed(Duration(seconds: 5), () {
+    return "Done after 2 seconds";
+  },);
 }
 
 
-Future<Post> fetchPost(){
-  const delay = Duration(seconds: 3);
-  return Future.delayed(delay, (){
-    return Post(userId: 123, title: "My post");
+OUTPUT:
+  Start
+  Future returned value: Done after 2 seconds
+  End
 
-  });
 
-}
-
+------------------ Using .then ---------------
 
 void main() {
 
-  fetchPost().then((post){
-    print(post.title);
-    print(post.userId);
-  }
+  print("Start");
+
+  getData().then((value) {
+    print("Future returned value: ${value}");
+  }).catchError((error) {
+      print("Error: ${error}");
+    },
   );
 
+  print("End");
+}
+
+Future<String> getData() {
+  return Future.delayed(Duration(seconds: 5), () {
+    return "Done after 2 seconds";
+  },);
 }
 
 
+OUTPUT:
+  Start
+  End
+  Future returned value: Done after 2 seconds
+  
+
+
+------------------------------- EXAMPLE 2 -------------------------------
+
+NB: Uncomment to use await
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+void main() async{
+  print("Start");
+
+  // Map<String, dynamic> value = await fetchData();
+  // print("Returned value: ${value}");
+
+  fetchData().then((value) {
+    print("Returned value: ${value}");
+  }).catchError((error) {
+    print("Error: ${error}");
+  });
+
+  print("End");
+}
+
+
+Future<Map<String, dynamic>> fetchData() async {
+  final response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts/1"));
+  if (response.statusCode == 200) {
+
+    final String jsonStringResponse = response.body;			// response.body returns the API response as a String.
+    final Map<String, dynamic> jsonResponse = json.decode(jsonStringResponse);    // json.decode() converts the JSON String into a Dart object such as a Map<String, dynamic> or List<dynamic>.
+    var postTitle = jsonResponse["title"];			// Assuming it's a json data response with a key of "title"
+
+    // print("JSON STRING: $jsonStringResponse");
+    // print("JSON RESPONSE: $jsonResponse");
+    // print("POST TITLE: $postTitle");
+
+    return jsonResponse;
+
+  } else {
+    // If the server did not return a 200 OK response, throw an exception.
+    throw Exception('Failed to load data from the API');
+  }
+}

@@ -25,4 +25,29 @@ void main() {
 }
 
 
-======================================================================
+================================== E.g 2====================================
+
+
+enum WorkPosition {
+  engineer,
+  coder,
+  designer,
+  writer,
+}
+
+class Employee {
+  String name;
+  WorkPosition employeePosition;
+
+  Employee ({required this.name, required this.employeePosition});
+}
+
+
+-----------------------------------------------
+
+void main() {
+
+  Employee e1 = Employee(name: "John", employeePosition: WorkPosition.engineer);
+  final e2 = Employee(name: "Rabiu", employeePosition: WorkPosition.coder);
+
+}

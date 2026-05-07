@@ -24,17 +24,19 @@ void main() {
 }
 
 
-void fetchData() async {
-  var response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts/1"));
+Future<Map<String, dynamic>> fetchData() async {
+  final response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts/1"));
   if (response.statusCode == 200) {
 
-    var jsonStringResponse = response.body;			// Even if the response is in json format, response.body returns it as String, hence why json.decode(response.body) below which parses the String to Json.
-    var jsonResponse = json.decode(jsonStringResponse);
-    var postTile = jsonResponse["title"];			// Assuming it's a json data response with a key of "title"
+    final jsonStringResponse = response.body;			                        // response.body returns the API response as a String.
+    final Map<String, dynamic> jsonResponse = json.decode(jsonStringResponse);    // json.decode() converts the JSON String into a Dart object such as a Map<String, dynamic> or List<dynamic>.
+    var postTitle = jsonResponse["title"];			                            // Assuming it's a json data response with a key of "title"
 
-    print("JSON STRING: $jsonStringResponse");
-    print("JSON RESPONSE: $jsonResponse");
-    print("POST TITLE: $postTile");
+    // print("JSON STRING: $jsonStringResponse");
+    // print("JSON RESPONSE: $jsonResponse");
+    // print("POST TITLE: $postTitle");
+
+    return jsonStringResponse;
 
   } else {
     // If the server did not return a 200 OK response, throw an exception.
