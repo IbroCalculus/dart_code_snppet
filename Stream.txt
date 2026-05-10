@@ -1,0 +1,141 @@
+A Stream in Dart is a way to handle asynchronous sequences of data over time.
+Instead of getting a single value (like a Future), a Stream can deliver multiple values, one after another.
+
+A Stream in Dart is a way to handle asynchronous sequences of data over time.
+Instead of getting a single value (like a Future), a Stream can deliver multiple values, one after another.
+
+------------ Difference between Future and Stream ---------------
+Future: A Future gives ONE value in the future. After completion, it is done forever.
+    E.g: Future<String>: Meaning "I will give you ONE String later."
+
+Stream: A Stream gives MULTIPLE values over time. 
+    E.g: Stream<int>: Meaning "I will continuously send integers over time."
+
+
+
+
+===================== USAGE =======================
+
+----------------- 1. Creating a Stream ----------------------------
+
+Stream<int> countStream() async* {
+
+  for (int i = 1; i <= 5; i++) {
+
+    await Future.delayed(Duration(seconds: 1));
+
+    yield i;
+
+  }
+}
+
+yield means: "Emit/send this value into the stream.".       (It is like return in Future, but for streams).
+
+
+Similar stream function (for continous period count):
+
+  Stream<int> numberStream = Stream<int>.periodic(
+    Duration(seconds: 1),
+    (value) => value,
+  );
+
+----------------- 2. Listening / Subscribing to Stream ( method 1. Similar to .then()) -----------------------
+
+NB: .listen() means "Subscribe to stream events."
+
+void main() {
+
+  print("Start");
+
+  countStream().listen(
+    (value) {
+      print(value);
+    },
+    
+    onError: (error) {
+      print("Error: $error");
+    },
+    
+    onDone: () {
+      print("Streaming done!");
+    },
+  );
+
+  print("End");
+}
+
+OUTPUT: START END 1 2 3 4 5 Streaming done!
+
+
+
+----------------- 2. Listening / Subscribing to Stream ( method 2. Using await) -----------------------
+
+Future<void> main() async {
+  
+  print("START");
+
+  try {
+    await for (int value in countStream()) {
+      print(value);
+    }
+    print("Streaming done!");
+  } catch (error) {
+    print("Error: $error");
+  }
+
+  print("END");
+}
+
+Stream<int> countStream() async* {
+  for (int i = 1; i <= 5; i++) {
+    await Future.delayed(Duration(seconds: 1));
+    yield i;
+  }
+  
+}
+
+OUTPUT: OUTPUT: START 1 2 3 4 5 Streaming done! END
+
+
+---------------------------- Stream types ----------------------------
+1. Single-subscription stream (default):
+        Can only be listened to once
+        Common in most use cases
+
+2. Broadcast stream:
+        Can have multiple listeners
+
+
+---------------------------- StreamController (manual control) ----------------------------
+
+A StreamController is an object that creates + manages + controls a stream.
+
+Normally, streams generate data automatically, Stream.periodic(...).  But with StreamController:
+    YOU decide:
+    - when data enters the stream
+    - what data enters
+    - when errors occur
+    - when stream closes
+
+This gives you full control over adding data.
+
+            import 'dart:async';
+
+            void main() {
+            final controller = StreamController<int>();
+
+            controller.stream.listen((data) {
+                print("Received: $data");
+            });
+
+            controller.sink.add(10);
+            controller.sink.add(20);
+            controller.sink.add(30);
+
+            controller.close();
+            }
+
+Key parts:
+    sink.add() → send data into stream
+    stream → listen to data
+    close() → stop stream (important)
