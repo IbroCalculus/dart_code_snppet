@@ -1,3 +1,8 @@
+
+NB: ?. is the null-aware access operator.     -> It means: “Only access .isEven if x is not null.”
+    ?? is the null-coalescing operator.       -> It means: “If the left side is null, use the right side.”
+    ! is the null assertion operator.         -> It means: “I guarantee this is NOT null.”
+
 ====== Making a value nullable =====
 
   int? money = null;
@@ -8,6 +13,7 @@
   // print(fullName?.length);   // Same as; if(fullName == null) return null, else return fullName.length (No error is thrown)
   // print(fullName?.length ?? "A null value, can't get length")		// A way to handle the above. If null, return "A null value, can't get length"
   print(fullName!.length);  	//Used when your are certain the value is not null. Will throw a runtime error if fullName is null.
+  
   // print(fullName!.length ?? "A null value, can't get length")		// This is meaningless, because fullName!.length will throw an error, hence, won't get to after ??
 
   String? fullName;
