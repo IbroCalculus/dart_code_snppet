@@ -1,8 +1,6 @@
 A Stream in Dart is a way to handle asynchronous sequences of data over time.
 Instead of getting a single value (like a Future), a Stream can deliver multiple values, one after another.
 
-A Stream in Dart is a way to handle asynchronous sequences of data over time.
-Instead of getting a single value (like a Future), a Stream can deliver multiple values, one after another.
 
 ------------ Difference between Future and Stream ---------------
 Future: A Future gives ONE value in the future. After completion, it is done forever.
