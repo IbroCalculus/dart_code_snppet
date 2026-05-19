@@ -41,32 +41,51 @@ Similar stream function (for continous period count):
 
 NB: .listen() means "Subscribe to stream events."
 
-void main() {
 
-  print("Start");
+  // Stream Generator  
+  Stream<int> countStream() async* {
+    for (int i = 1; i <= 5; i++) {
+      await Future.delayed(Duration(seconds: 1));
+      yield i;
+    }
+  }
 
-  countStream().listen(
-    (value) {
-      print(value);
-    },
-    
-    onError: (error) {
-      print("Error: $error");
-    },
-    
-    onDone: () {
-      print("Streaming done!");
-    },
-  );
 
-  print("End");
-}
+  // Stream listener (Stream subscription)
+  void main() {
+
+    print("Start");
+
+    countStream().listen(
+      (value) {
+        print(value);
+      },
+      
+      onError: (error) {
+        print("Error: $error");
+      },
+      
+      onDone: () {
+        print("Streaming done!");
+      },
+    );
+
+    print("End");
+  }
 
 OUTPUT: START END 1 2 3 4 5 Streaming done!
 
 
 
 ----------------- 2. Listening / Subscribing to Stream ( method 2. Using await) -----------------------
+
+Stream<int> countStream() async* {
+  for (int i = 1; i <= 5; i++) {
+    await Future.delayed(Duration(seconds: 1));
+    yield i;
+  }  
+}
+
 
 Future<void> main() async {
   
@@ -82,14 +101,6 @@ Future<void> main() async {
   }
 
   print("END");
-}
-
-Stream<int> countStream() async* {
-  for (int i = 1; i <= 5; i++) {
-    await Future.delayed(Duration(seconds: 1));
-    yield i;
-  }
-  
 }
 
 OUTPUT: OUTPUT: START 1 2 3 4 5 Streaming done! END
