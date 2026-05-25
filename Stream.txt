@@ -14,23 +14,21 @@ Stream: A Stream gives MULTIPLE values over time.
 
 ===================== USAGE =======================
 
------------------ 1. Creating a Stream ----------------------------
+-------- 1. Creating a Stream generator function (or an async generator function) ------------
 
 Stream<int> countStream() async* {
 
   for (int i = 1; i <= 5; i++) {
-
     await Future.delayed(Duration(seconds: 1));
-
     yield i;
-
   }
+
 }
 
 yield means: "Emit/send this value into the stream.".       (It is like return in Future, but for streams).
 
 
-Similar stream function (for continous period count):
+Similar stream function (for continuous periodic count):
 
   Stream<int> numberStream = Stream<int>.periodic(
     Duration(seconds: 1),
@@ -42,7 +40,7 @@ Similar stream function (for continous period count):
 NB: .listen() means "Subscribe to stream events."
 
 
-  // Stream Generator  
+  // Stream Generator function
   Stream<int> countStream() async* {
     for (int i = 1; i <= 5; i++) {
       await Future.delayed(Duration(seconds: 1));
