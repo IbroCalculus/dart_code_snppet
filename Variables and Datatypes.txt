@@ -9,7 +9,7 @@ const is used when value is known at compile time, while final is used when valu
   final date = DateTime.now();	// Correct
 
 ----------------------------------------------------------------------------------------------------------
-  var fullName;		// You can use var in place of specifying the data type.
+  var fullName;		      // You can use var in place of specifying the data type.
   dynamic firstName;    // With dynamic, declare a datatype, and later reassign a different datatype.
 
 E.g:
@@ -17,7 +17,7 @@ E.g:
   f = 45;
   f = true;
 The above will give an error for var. For var, we cannot reassign a different datatype, but the same datatype.
-NB: A variable declared as var without a datatype, is by default dynamic. E.g:
+NB: A variable declared as var without a datatype, is by d  efault dynamic. E.g:
   var x;
   x = false;
   x = "Hello";

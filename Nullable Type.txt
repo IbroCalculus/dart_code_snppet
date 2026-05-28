@@ -1,4 +1,9 @@
+Null safety is a critical feature in dart that prevents variables from being null, unless explicitly declared as being nullable.
+This eliminates one of the most common bugs in programming: "The null reference error!"
 
+Therefore, in dart, by default, variables are non-nullable.
+
+--------------------------------
 NB: ?. is the null-aware access operator.     -> It means: “Only access .isEven if x is not null.”
     ?? is the null-coalescing operator.       -> It means: “If the left side is null, use the right side.”
     ! is the null assertion operator.         -> It means: “I guarantee this is NOT null.”

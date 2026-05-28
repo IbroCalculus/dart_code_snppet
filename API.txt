@@ -102,6 +102,44 @@ void fetchData() async {
 
 ================== 2. POST REQUEST =====================
 
+-------- Assume an endpoint http://127.0.0.1:8000/posts, that accepts a body of { title: <String>, body: <String>}.---------
+
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
+
+Future<void> createPost() async {
+  final apiUrl = "http://127.0.0.1:8000/posts";
+
+  try {    
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode(<String, String>{
+        'title': 'foo',
+        'body': 'bar',
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      final data = json.decode(response.body);
+      print(data);
+    } else {
+      print("Error: ${response.body}");
+    }
+
+  } catch (e) {
+    print("Error: $e");
+  }
+}
+
+
+
+-------------------------------------------------------
+
   void _login() async {
 
     // Prepare the data to be sent
