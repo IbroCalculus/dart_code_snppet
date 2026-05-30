@@ -1,0 +1,45 @@
+All route handlers must return an outbound response. In this section, we’ll take a look at various ways in which we can create a custom response.
+
+=============== Status Code ==============
+We can customize the status code of the response via the statusCode parameter on the Response object:
+
+------------------- Example ------------------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  return Response(statusCode: 204);                 // statusCode: 204
+}
+
+
+=============== Headers ==============
+We can customize the headers of the response via the headers parameter on the Response object:
+
+------------------- Example ------------------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  return Response(headers: {'hello': 'world'});
+}
+
+
+===============  Body ==============
+We can return a custom body via the default Response constructor
+
+------------------- Example ------------------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  return Response(body: 'Hello World');
+}
+
+
+Also, we can return JSON via the Response.json() constructor
+
+------------------- Example ------------------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  return Response.json(
+    body: <String, dynamic>{'hello': 'world!'},
+  );
+}

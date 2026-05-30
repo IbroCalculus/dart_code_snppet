@@ -1,0 +1,25 @@
+The goal of Dart Frog is to help developers effectively build backends in Dart.
+It is the equivalent of express in Node.js or Flask in Python. It is a fast mini framework for building web applications in Dart.
+
+
+=============== INSTALLATION ===============
+ - Have Dart SDK Installed on machine (OR simply Flutter SDK which includes Dart SDK)
+ - Run dart pub global activate dart_frog_cli       (INSTALLS GLOBALLY ON MACHINE)
+
+
+=============== CREATING PROJECT ===============
+ - dart_frog create my_project
+
+
+=============== RUNNING PROJECT ===============
+Start the Dev Server via:
+ cmd > dart_frog dev                ( listening on http://localhost:8080 )
+
+ ALSO: dart_frog dev -- port 8081
+
+
+
+============== CREATE A PRODUCTION BUILD ===============
+Create a production build which includes a DockerFile so that you can deploy anywhere:
+
+cmd > dart_frog build

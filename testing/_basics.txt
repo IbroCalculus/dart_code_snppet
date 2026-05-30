@@ -1,0 +1,32 @@
+----------- What is Testing? ------------
+
+Testing is the process of verifying that your code behaves as expected.
+Think of testing as writing code that checks other code.
+
+For example, if you write:
+
+    int add(int a, int b) {
+    return a + b;
+    }
+
+Instead of manually running; print(add(2, 3)); every time, you write a test that automatically checks whether the result is 5.
+
+
+------- Why Testing Matters ------------
+Imagine you build a Flutter app with: Login, Registration, Cart, Payment, Profile.
+
+You later change some code and accidentally break the login feature. 
+    - Without tests; You may not notice the bug immediately, Users find the problem first.
+    - With tests; The failing test warns you before deployment.
+
+
+----------- Types of Testing ----------
+There are three (3) major testing categories you'll encounter in Dart and Flutter.
+
+1. Unit Testing:                Tests a single function, method, or class in isolation.
+2. Integration Testing          Tests multiple components working together.
+3. End-to-End (E2E) Testing     Tests the application exactly like a real user would.
+
+------------ 1. Unit Testing ----------
+
+

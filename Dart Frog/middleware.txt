@@ -1,0 +1,28 @@
+Middleware in Dart Frog allows you to execute code before and after a request is processed. You can modify the inbound request and outbound responses, provide dependencies, and more!
+
+
+--------------- CREATE A MIDDLEWARE ---------------
+
+cmd > dart_frog new middleware "/hello2"
+
+File Structure:
+routes/
+    hello2/
+        _middleware.dart
+        index.dart
+
+
+--------- In _middleware.dart ---------
+
+import 'package:dart_frog/dart_frog.dart';
+
+Handler middleware(Handler handler) {
+  return (context) async {
+    print('This runs BEFORE the request is handled');
+    
+    final response = await handler(context);
+
+    print('This runs AFTER the request is handled, before response is returned');
+    return response;
+  };
+}

@@ -1,0 +1,189 @@
+THIS FILE CONTAINS:
+    - CREATING ROUTES
+    - REQUEST CONTEXT
+    - HTTP Method
+    - HEADERS
+    - PATH PARAMETERS
+    - QUERY PARAMETERS
+    - BODY
+
+
+
+Each routes is a separate file name in the routes directory, where index.dart corresponds to "/",
+hello.dart corresponds to "/hello", and so on.
+
+===================== CREATING ROUTES ==================
+You can create route either by creating the ROUTE_NAME.dart (ie; hello.dart) file in the routes directory,
+or by creating a new route in the routes directory using the command: dart_frog new route "/hello".
+
+NB: I simply copy/paste the existing index.dart file and rename it to hello.dart
+
+
+===================== ROUTE FILE ==================
+
+------------- E.g (/hello) ------------
+hello.dart:
+
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  return Response(body: 'Hello Ibrahim, It is nice to meet you!');
+}
+
+
+===================== REQUEST CONTEXT ==================
+
+All route handlers have access to a RequestContext which can be used to access the incoming request as well as dependencies provided to the request context
+The RequestContext class is the main entry point for interacting with the incoming request.
+
+---------- E.g: -----------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+
+  final request = context.request;                  // Access the incoming request.
+
+  // Do stuff with the incoming request...
+
+  
+  return Response(body: 'Hello World');             // Return a response.
+}
+
+
+================= HTTP Method ==================
+
+Access the HTTP method used in the request via context.request.method.value
+
+--------------- E.g: ----------------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  final request = context.request;            // Access incoming request
+  final method = request.method.value;        // Access incoming method
+  print("The method is: $method");
+
+  return Response(body: 'This request method is $method!');
+}
+
+
+================= REQUEST HEADERS =================
+We can access request headers via context.request.headers.
+
+
+---------------- E.g -----------------------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  final request = context.request;            // Access incoming request
+  final method = request.method.value;        // Access incoming method
+  
+  final headers = request.headers;            // Access incoming headers as Map<String, String>
+  
+  print('HEADERS: $headers');
+  print('The method is: $method');
+
+  return Response(body: 'This request method is $method!');
+}
+
+
+
+================= PATH PARAMETERS / DYNAMIC ROUTES ===========================
+
+http://localhost:8081/person/123/posts/456, where 123 is the personId and 456 is the postId
+
+The Folder structure is:
+routes/
+  person/
+    [personId]/
+      posts/
+        [postId].dart
+
+--- in [postId.dart] ---
+
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context, String userId, String postId) {
+  print('User:: $userId, Post::  $postId');
+  return Response(
+    body: 'User: $userId, Post: $postId',
+  );
+}
+
+
+
+================= QUERY PARAMETERS =================
+
+We can access query parameters via context.request.uri.queryParameters.
+
+
+---------------- E.g -----------------------
+import 'package:dart_frog/dart_frog.dart';
+
+Response onRequest(RequestContext context) {
+  final request = context.request;                          // Access incoming request
+  final params = request.uri.queryParameters;
+
+  final name = params['name'] ?? 'Default name';            // Get the value for the key `name`.
+  print('name query param: $name');
+
+  return Response(body: 'Response from Dart Frog!');
+}
+
+
+
+=================== BODY (Access the body as a string, not JSON. For JSON, check next below) ===================
+We can access the body of the incoming request via context.request.body
+
+---------------- E.g -----------------------
+import 'package:dart_frog/dart_frog.dart';
+
+Future<Response> onRequest(RequestContext context) async {
+  final request = context.request;
+
+  final body = await request.body();                  // Access the request body as a string.
+
+  print('The body: $body');
+  
+  return Response(body: '$body');
+}
+
+
+=================== JSON (Access the body as a JSON, not String) =====================
+you can use context.request.json() to read the contents of the request body as a Map<String, dynamic>
+
+---------------- E.g -----------------------
+
+import 'package:dart_frog/dart_frog.dart';
+
+Future<Response> onRequest(RequestContext context) async {
+  final request = context.request;
+
+  final body = await request.json();                  // Access the request body as a parsed JSON.
+
+  print('The body: $body');
+
+  return Response.json(body: {'request_body': body});
+  // return Response(body: '$body');
+}
+
+
+
+==================== FORM DATA ====================
+context.request.formData() to read the contents of the request body as FormData
+
+---------------- E.g -----------------------
+
+import 'package:dart_frog/dart_frog.dart';
+
+Future<Response> onRequest(RequestContext context) async {
+  final request = context.request;
+
+  final formData = await request.formData();        // Access the request body form data.
+
+  print('Form data: $formData');
+
+  return Response.json(body: {'form_data': formData.fields});
+}
+
+
+

@@ -6,13 +6,13 @@ Unit testing allows you to verify individual parts of your code, such as specifi
 
 dart_practice2/
  ├── lib/
- │    └── main.dart
+ │    └── calculator.dart
  ├── test/
- │    └── main_test.dart
+ │    └── calculator_test.dart
  ├── pubspec.yaml
 
  ---------- pubspec.yaml ----------
- 
+
  name: dart_practice2
  
 dev_dependencies:
@@ -31,22 +31,34 @@ class Calculator {
 ------------- main_test.dart ----------
 
 import 'package:test/test.dart';
-import 'package:dart_practice2/main.dart';
+import 'package:dart_practice2/calculator.dart';
 
 void main() {
 
-  group("Calculator tests", () {
-    final calculator = Calculator();
-
-    test("adds one to input values", () {
-      expect(calculator.add(2, 2), 4);
+    setUp(() {
+      //   The code to run before each test. NOT COMPULSORY TO HAVE
+      print("Setup");
     });
 
-    test("subtracts one to input values", () {
-      expect(calculator.subtract(2, 2), 0);
+    tearDown(() {
+      //   The code to run after each test. NOT COMPULSORY TO HAVE
+      print("Teardown");
+    });
+    
+
+    group("Calculator tests", () {
+        final calculator = Calculator();
+
+        test("adds one to input values", () {
+            expect(calculator.add(2, 2), 4);
+        });
+
+        test("subtracts one to input values", () {
+            expect(calculator.subtract(2, 2), 0);
+        });
     });
 
-  });
+
 }
 
 
