@@ -2,6 +2,7 @@ abstract class Content{
   final String title;
 
   Content(this.title);
+  
   void publish();		// Abstract method;
   void publish2(){
     print("publish2 method within abstract class. Can't override");

@@ -1,0 +1,37 @@
+import 'dart:io';
+
+NB: This does not work on flutter web because browsers do not provide direct access to the OS.
+
+
+--------- i. Working with files ----------
+
+Can Create, Read, Write, Delete files
+
+import 'dart:io';
+
+void main() async {
+  File file = File('test.txt');
+
+  await file.writeAsString('Hello Dart');
+  // await file.writeAsString('Hello Dart', mode: FileMode.append);
+
+  String content = await file.readAsString();
+
+  print(content);
+}
+
+
+
+--------- i. Working with directories ----------
+
+import 'dart:io';
+
+void main() {
+  Directory dir = Directory('my_folder');
+
+  if (!dir.existsSync()) {
+    dir.createSync();
+  }
+
+  print("Folder created");
+}

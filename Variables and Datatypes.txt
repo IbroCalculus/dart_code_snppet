@@ -52,9 +52,9 @@ NB: A variable declared as var without a datatype, is by d  efault dynamic. E.g:
   dynamic numX = 34;
   dynamic numY = 67.54;
 
-  print(fName is! int);
-  print(numX is! String);
-  print(numY is Float);		// boolean 
+  print(fName is! int);     // check if fName is not an int
+  print(numX is String);    // check if numX is a String
+  print(numY is Float);		  // check if numY is a Float
 -----------------------------
   print(fName.runtimeType);	// String
   print(numX.runtimeType);	// int

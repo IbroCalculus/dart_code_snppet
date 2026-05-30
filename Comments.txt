@@ -1,0 +1,11 @@
+// 1. Single-line comments
+
+/*
+2. Multi-line comments
+*/
+
+
+///  3. Doc comments
+int add(int a, int b) {
+  return a + b;
+}

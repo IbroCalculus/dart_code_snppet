@@ -1,19 +1,93 @@
-NB: The website 'pub.dev' is the official package repository for Dart and Flutter apps.
+----------------- Common Dart libraries -----------------
+
+===================== 1. 'dart:core' (For core dart functionality) =====================
+
+===================== 2. 'dart:math' (For math operations) =====================
+
+===================== 3. 'dart:convert' (For encoding and decoding) =====================
+
+import 'dart:convert';
+
+void main() {
+  
+  Map<String, dynamic> user  = {
+    'name': 'Mike',
+    'age': 20,
+    'is_admin': true,
+  };
+
+  String jsonString = jsonEncode(user);
+  print("Encoded data: $jsonString");
+
+  print("---------------------------------------");
+
+  Map<String, dynamic> decoded = jsonDecode(jsonString);
+  print("Decoded data: $decoded");
+}
+
+===================== 4. 'dart:io' (For file mainpulation) =====================
+
+For interacting with the OS and performing input/output operations.
+It gives access to things outside the program itself, such as: Files, Directories, Terminal input/output, Sockets, HTTP servers, OS infromation, etc.
+
+NB: This does not work on flutter web because browsers do not provide direct access to the OS.
+
+--------- i. Reading user input from terminal ----------
+import 'dart:io';
+
+void main() {
+  stdout.write("Enter your name: ");
+  String name = stdin.readLineSync() ?? "";
+
+  print("Hello $name");
+}
 
 
-import 'dart:math' as math;		//Built-in package. CHECK Math.txt
+--------- ii. Working with files ----------
 
-  var maxVal = math.max(34, 66);
-  print("The maximum of both is: ${maxVal}");
+Can Create, Read, Write, Delete files
 
-  print("PI: ${math.pi}");
+import 'dart:io';
 
+void main() async {
+  File file = File('test.txt');
 
+  await file.writeAsString('Hello Dart');
 
-================== USING EXTERNAL LIBRARIES / DEPENDENCIIES =================
-Create, if not exists, 'pubspec.yaml' file.
-It is similar to mainfest file in android studio, we also add dependencies like within gradle file.
+  String content = await file.readAsString();
 
-.yaml is a markup file where things are defined by spaces, rather than curly brackets as used in many programming languages. 
+  print(content);
+}
 
+--------- iii. Working with directories ----------
 
+import 'dart:io';
+
+void main() {
+  Directory dir = Directory('my_folder');
+
+  if (!dir.existsSync()) {
+    dir.createSync();
+  }
+
+  print("Folder created");
+}
+
+--------- iv. Making HTTP requests (low-level) ----------
+
+NB: http or dio package is preferred for making HTTP requests
+
+import 'dart:io';
+
+void main() async {
+  HttpClient client = HttpClient();
+
+  HttpClientRequest request =
+      await client.getUrl(Uri.parse('https://example.com'));
+
+  HttpClientResponse response = await request.close();
+
+  print(response.statusCode);
+}
+
+--------- v. Running system commands ----------

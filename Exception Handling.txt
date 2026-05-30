@@ -17,10 +17,105 @@
 
 ============================ THROW EXCEPTIONS ====================
 
-  print("Enter a first name: ");
-  var fName = stdin.readLineSync()!;
-  if(fName.startsWith("I")){
-    throw Exception("Name cannot begin with I");
-  }else{
-    print("Welcome $fName");
+----------- E.g 1 ----------
+
+import 'dart:io';
+
+void main() {
+
+  try {
+    print("Enter a first name: ");
+    var fName = stdin.readLineSync()!;
+
+    if (fName.startsWith("I")) {
+      throw Exception("Name cannot begin with I");
+    } else {
+      print("Welcome $fName");
+    }
+  } catch (e) {
+    print("Error: $e");
   }
+
+  print("Program continues running...");
+}
+
+
+------------ E.g 2 (Throwing an Exception) -----------
+
+double divide(int a, int b) {
+  if (b == 0) {
+    throw Exception("Cannot divide by zero");
+  }
+  return a / b;
+}
+
+void main() {
+  try {
+    var result = divide(10, 0);
+    print(result);
+  } catch (e) {
+    print("Error: $e");
+  }
+}
+
+
+------------ E.g 3 (Throwing exceptions multiple times and later handling in main) -----------
+
+double divide(int a, int b) {
+  if (b == 0) {
+    throw Exception("Cannot divide by zero");
+  }
+  return a / b;
+}
+
+double calculateResult() {
+  try {
+    return divide(10, 0);
+
+  } catch (e) {
+    print("Caught inside calculateResult(): $e");
+
+    throw Exception("Calculation failed");
+  }
+}
+
+void main() {
+  try {
+    var result = calculateResult();
+    print(result);
+  } catch (e) {
+    print("Caught in main(): $e");
+  }
+}
+
+
+================= Custom Exception ==================
+
+import 'dart:io';
+
+void main() {
+  try {
+    print(divide(10, 0));
+  } catch (e) {
+    print(e);
+  }
+}
+
+
+double divide(int a, int b) {
+  if (b == 0) {
+    throw CustomException("This is a custom Exception");
+  }
+  return a / b;
+}
+
+
+class CustomException implements Exception {
+  String message;
+  CustomException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
+}

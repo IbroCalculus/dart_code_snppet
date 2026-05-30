@@ -1,0 +1,42 @@
+
+class Vehicle {
+    
+  String name;
+  int wheels;
+
+  Vehicle(this.name, this.wheels);
+
+  void drive() {
+    print("Driving $name");
+  }
+
+}
+
+
+class Car extends Vehicle  {
+
+  final int seats;
+  final String fuelType;
+
+  Car(String name, int wheels, this.seats, this.fuelType) : super(name, wheels);
+
+  @override
+  void drive() {
+    super.drive();
+    print("Driving $name");
+  }
+
+  void honk(){
+    print("Car honk");
+  }
+
+}
+
+
+void main() {
+
+  Car car = Car("BMW", 4, 5, "Petrol");
+  car.drive();
+  car.honk();
+
+}

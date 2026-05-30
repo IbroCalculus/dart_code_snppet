@@ -1,3 +1,6 @@
+A collection is an object that stores multiple values together.
+
+Dart mainly has 3 built-in collections:
 - List (CHECK List.txt)
 - Map
 - Set

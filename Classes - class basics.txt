@@ -1,0 +1,29 @@
+
+class Person{
+
+  String name;
+  int age;
+  bool isMarried;
+
+  // Person(this.name, this.age, this.isMarried);                                 // Constructor with positional arguments
+  Person({required this.name, required this.age, required this.isMarried});       // Constructor with named arguments
+
+  void printDetails(){
+    print("Name: $name, Age: $age, Is Married: $isMarried");
+  }
+
+  @override
+  String toString() {
+    return 'Person{name: $name, age: $age, isMarried: $isMarried}';
+  }
+
+}
+
+
+void main() {
+
+    Person person = Person(name: "John", age: 30, isMarried: true);
+    print(person);
+    person.printDetails();
+    
+}

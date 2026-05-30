@@ -1,0 +1,63 @@
+NB: We have; 
+        named constructors (2. named constructors), 
+        and constructors with named parameters (ie Rectangle({required String name})).
+        as well as constructors with positional parameters ( Rectangle(this.length, this.width) ).
+
+
+------- 1. Default constructor ----------
+This is the default constructor that takes the class name
+
+class Rectangle {
+  double length;
+  double width;
+
+  Rectangle(this.length, this.width);
+
+}
+
+ie; Rectangle(10, 5);
+
+
+
+------- 2. named constructors ----------
+
+void main() {
+
+  Rectangle rectangle = Rectangle(10, 5);
+  Rectangle square = Rectangle.square(10);
+  Rectangle zero = Rectangle.zero();
+  Rectangle fromJson = Rectangle.fromJson({'length': 10.0, 'width': 5.0});
+
+  rectangle.printArea();
+  square.printArea();
+  zero.printArea();
+  fromJson.printArea();
+
+}
+
+class Rectangle {
+  double length;
+  double width;
+
+  Rectangle(this.length, this.width);
+
+  Rectangle.square(double side) :
+      length = side,
+      width = side;
+
+  Rectangle.zero() :
+      length = 0,
+      width = 0;
+
+  Rectangle.fromJson(Map<String, dynamic> json) :
+      length = json['length'],
+      width = json['width'];
+
+  void printArea(){
+    print(length * width);
+  }
+
+}
+
+
+------- 3. Factory constructors ----------

@@ -1,6 +1,12 @@
 
  Dart is a programming language that is focused on fronted(mobile apps, web) user interface (UI) development
 
+ 
+============== CREATING A NEW PROJECT ==============
+In Intelij:
+  New Project -> Dart -> Console Application - A command-line application -> FILE_NAME
+  Write codes in lib folder.
+
 ================= Everything runs within the main function ==========
 //Always end with ;
 
