@@ -1,0 +1,76 @@
+
+=============== What is Genkit?   =============================
+Genkit is Google’s open-source framework for building full-stack, AI-powered and agentic applications.
+
+Genkit is Google's open-source framework for building AI-powered applications. It provides a unified way to work with different AI models (Gemini, OpenAI, Anthropic, Ollama, and others), create AI workflows, call tools/functions, generate structured data, and build AI agents.
+
+You can think of Genkit as being similar in purpose to frameworks like LangChain, but designed by Google with strong integration into Firebase and Google Cloud.
+
+
+=============== How does Genkit relate to Dart? ==================
+In 2026, Genkit has an official Dart SDK. This means you can write AI workflows directly in Dart instead of JavaScript, Python, or Go.
+
+
+=============== How does Genkit relate to Flutter? ================
+Flutter is the frontend, Genkit is usually the AI backend.
+
+A common architecture looks like:
+        Flutter App
+            │
+            ▼
+        Dart Frog / Cloud Run / Firebase Functions
+            │
+            ▼
+        Genkit
+            │
+            ▼
+        Gemini / OpenAI / Claude
+
+The Flutter app sends a request to your backend.
+The backend uses Genkit to:
+    Call AI models
+    Execute tools
+    Access databases
+    Run workflows
+    Protect API keys
+
+Then it returns the result to Flutter.
+
+
+=============== Why should a Flutter developer care about Genkit? ================
+If you're building:
+    AI chatbots
+    AI assistants
+    Content generators
+    Recommendation systems
+    AI agents
+    RAG (Retrieval-Augmented Generation) applications
+
+Genkit gives you:
+1. Model portability
+Switch providers without rewriting your app. (ie; Gemini, OpenAI, Anthropic)
+
+2. Structured outputs
+Instead of receiving random text:
+    {
+    "title": "Inception",
+    "year": 2010
+    }
+you can define Dart types and get strongly-typed data.
+
+3. Tool calling
+Allow the AI to execute Dart functions.
+
+E.g:
+    Future<double> getWeather() async {
+    ...
+    }
+The model can call that function when needed.
+
+4. Agent workflows
+Build systems that:
+    Think
+    Call tools
+    Analyze results
+    Generate answers
+without manually orchestrating everything.

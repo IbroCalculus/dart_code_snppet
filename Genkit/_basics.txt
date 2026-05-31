@@ -1,0 +1,63 @@
+================ INSTALL GENKIT CLI ON MACHINE =================
+cmd > curl -sL cli.genkit.dev | bash
+
+================ PROJECT SETUP =================
+cmd > dart create -t console-simple my_genkit_app
+cmd > cd my_genkit_app
+
+
+================ WITHIN THE PROJECT CMD =========
+cmd > dart pub add genkit genkit_google_genai dotenv schemantic dev:build_runner
+
+
+================ GET THE GENAI API KEY  ==============
+
+If using Gemini, get from Google AI Studio.
+NB THIS SECTIONS: 
+    final ai = Genkit(plugins: [googleAI(apiKey: apiKey)]);     // googleAI. Can be others like openAI, Anthropic. CHEKC GENKIT.DOCS FOR MORE.
+
+And also the section;  model: googleAI.gemini('gemini-2.5-flash')
+
+
+
+
+================ bin/main.dart (This is using Google AI) ============
+
+NB: For same project, using local model (LM Studio), check LM_Studio.txt
+NB: Make sure to have a .env file with your API key (GEMIN_API_KEY=your_api_key)
+
+
+
+import 'package:dotenv/dotenv.dart';
+import 'package:genkit/genkit.dart';
+import 'package:genkit_google_genai/genkit_google_genai.dart';
+
+void main() async {
+  final env = DotEnv()..load();
+  final apiKey = env['GEMINI_API_KEY'];
+
+  if (apiKey == null || apiKey.isEmpty) {
+    print('Error: GEMINI_API_KEY is not set in the .env file.');
+    return;
+  }
+
+  // Initialize Genkit with the Google AI plugin
+  final ai = Genkit(plugins: [googleAI(apiKey: apiKey)]);
+
+  print('Generating a response with Genkit...');
+
+  try {
+    // Generate text using the Gemini 1.5 Flash model
+    final response = await ai.generate(
+      model: googleAI.gemini('gemini-2.5-flash'),
+      // model: googleAI.gemini('google/gemma-4-31b-it'),
+      prompt: 'Write a haiku about writing clean code.',
+    );
+
+    print('\n--- Generated Haiku ---');
+    print(response.text);
+    print('-----------------------\n');
+  } catch (e) {
+    print('Error during generation: $e');
+  }
+}

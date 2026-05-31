@@ -1,0 +1,37 @@
+
+================ WITHIN THE PROJECT CMD =========
+cmd > dart pub add genkit genkit_openai
+
+
+================ bin/main.dart (This is using Local model running on LM Studio) ============
+
+import 'package:genkit/genkit.dart';
+import 'package:genkit_openai/genkit_openai.dart';
+
+Future<void> main() async {
+
+  // Initialize Genkit with OpenAI-compatible provider (LM Studio)
+  final ai = Genkit(
+    plugins: [
+      openAI(
+        apiKey: 'lm-studio', // not used but required by interface
+        baseUrl: 'http://127.0.0.1:1234/v1',
+      ),
+    ],
+  );
+
+  print('Generating response from LM Studio...');
+
+  try {
+    final response = await ai.generate(
+      model: openAI.model('google/gemma-4-e4b'),
+      prompt: 'Write a haiku about writing clean code.',
+    );
+
+    print('\n--- Generated Output ---');
+    print(response.text);
+    print('------------------------\n');
+  } catch (e) {
+    print('Error: $e');
+  }
+}
