@@ -1,27 +1,28 @@
 THIS FILE CONTAINS:
-    - CREATING ROUTES
-    - REQUEST CONTEXT
-    - HTTP Method
-    - HEADERS
-    - PATH PARAMETERS
-    - QUERY PARAMETERS
-    - BODY
+    - 1. CREATING ROUTES
+    - 2. REQUEST CONTEXT
+    - 3. HTTP Method
+    - 4. HEADERS
+    - 5. PATH PARAMETERS
+    - 6. QUERY PARAMETERS
+    - 7. BODY
+    - 8. JSON
+    - 9. FORM DATA
 
 
 
 Each routes is a separate file name in the routes directory, where index.dart corresponds to "/",
 hello.dart corresponds to "/hello", and so on.
 
-===================== CREATING ROUTES ==================
+===================== 1. CREATING ROUTES ==================
+
 You can create route either by creating the ROUTE_NAME.dart (ie; hello.dart) file in the routes directory,
 or by creating a new route in the routes directory using the command: dart_frog new route "/hello".
 
 NB: I simply copy/paste the existing index.dart file and rename it to hello.dart
 
 
-===================== ROUTE FILE ==================
-
-------------- E.g (/hello) ------------
+------------------- 1b. The route file (E.g /hello) -------------------
 hello.dart:
 
 import 'package:dart_frog/dart_frog.dart';
@@ -31,7 +32,7 @@ Response onRequest(RequestContext context) {
 }
 
 
-===================== REQUEST CONTEXT ==================
+===================== 2. REQUEST CONTEXT ==================
 
 All route handlers have access to a RequestContext which can be used to access the incoming request as well as dependencies provided to the request context
 The RequestContext class is the main entry point for interacting with the incoming request.
@@ -50,7 +51,7 @@ Response onRequest(RequestContext context) {
 }
 
 
-================= HTTP Method ==================
+================= 3. HTTP Method ==================
 
 Access the HTTP method used in the request via context.request.method.value
 
@@ -66,7 +67,7 @@ Response onRequest(RequestContext context) {
 }
 
 
-================= REQUEST HEADERS =================
+================= 4. REQUEST HEADERS =================
 We can access request headers via context.request.headers.
 
 
@@ -87,7 +88,7 @@ Response onRequest(RequestContext context) {
 
 
 
-================= PATH PARAMETERS / DYNAMIC ROUTES ===========================
+================= 5. PATH PARAMETERS / DYNAMIC ROUTES ===========================
 
 http://localhost:8081/person/123/posts/456, where 123 is the personId and 456 is the postId
 
@@ -111,7 +112,7 @@ Response onRequest(RequestContext context, String userId, String postId) {
 
 
 
-================= QUERY PARAMETERS =================
+================= 6. QUERY PARAMETERS =================
 
 We can access query parameters via context.request.uri.queryParameters.
 
@@ -131,7 +132,7 @@ Response onRequest(RequestContext context) {
 
 
 
-=================== BODY (Access the body as a string, not JSON. For JSON, check next below) ===================
+=================== 7. BODY (Access the body as a string, not JSON. For JSON, check next below) ===================
 We can access the body of the incoming request via context.request.body
 
 ---------------- E.g -----------------------
@@ -148,7 +149,7 @@ Future<Response> onRequest(RequestContext context) async {
 }
 
 
-=================== JSON (Access the body as a JSON, not String) =====================
+=================== 8. JSON (Access the body as a JSON, not String) =====================
 you can use context.request.json() to read the contents of the request body as a Map<String, dynamic>
 
 ---------------- E.g -----------------------
@@ -168,7 +169,7 @@ Future<Response> onRequest(RequestContext context) async {
 
 
 
-==================== FORM DATA ====================
+==================== 9. FORM DATA ====================
 context.request.formData() to read the contents of the request body as FormData
 
 ---------------- E.g -----------------------

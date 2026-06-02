@@ -36,3 +36,44 @@ mixin Dclass{							//NB: mixin
   cclass1.methodA();
   cclass1.methodB();
   cclass1.methodC();
+
+
+=============================== EXAMPLE 2 ============================
+
+void main(){  
+  Animal animal = Animal();
+  Human human = Human();
+  
+  human.talk();
+  // animal.talk();       // .talk() not available, because the mixin not used in class Animal
+}
+
+mixin Walk{
+  void walk(){}
+}
+
+mixin Talk{
+  void talk(){}
+}
+
+mixin Reproduce{
+  void reproduce(){}
+}
+
+class Human with Talk, Walk, Reproduce{
+ void description(){
+   print("This is a human");
+ } 
+ 
+ @override
+  void talk() {
+   print("Humans can talk");
+  }
+ 
+}
+
+class Animal with Walk, Reproduce{
+ void description(){
+   print("This is an animal");
+ } 
+}

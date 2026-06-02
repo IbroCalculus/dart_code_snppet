@@ -7,8 +7,8 @@
 E.g 1:
   // Pass in any datatype
 
-  welcome(45);
-  welcome("Somebody");
+  welcome(45);                  // OPTIONAL: welcome<int>(45);
+  welcome("Somebody");          // OPTIONAL: welcome<String>("Somebody!");
   welcome('C');
 
 void welcome<T> (T t){

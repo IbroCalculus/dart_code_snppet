@@ -1,0 +1,68 @@
+Polymorphism means One thing can take many forms.
+Different objects can be treated as the same type and respond differently to the same method call.
+
+A good mental model is:
+  Polymorphism allows you to write code that works with a parent type (or interface) while letting each child type provide its own behavior.
+
+That's why it's often summarized as:
+  "One interface, many implementations."
+
+
+Polymorphism works with late binding.
+Late binding is the process where Dart waits until runtime to determine which overridden method implementation should be executed based on the object's actual type.  
+
+--------------------- Example ---------------------
+
+A parent class Animal, and 3 child classes Dog, Cat, Cow.
+
+class Animal {
+  void speak() {
+    print("Some animal sound");
+  }
+}
+
+class Dog extends Animal {
+  @override
+  void speak() {
+    print("Woof!");
+  }
+}
+
+class Cat extends Animal {
+  @override
+  void speak() {
+    print("Meow!");
+  }
+}
+
+class Cow extends Animal {
+  @override
+  void speak() {
+    print("Moo!");
+  }
+}
+
+
+
+void main() {
+  Animal animal1 = Dog();       // Each are of type Animal, but different objects. 
+  Animal animal2 = Cat();       // This is also known as late binding. ie: Animal animal = Dog();
+  Animal animal3 = Cow();       // Early binding will be: Dog dog = Dog();
+
+  animal1.speak();              // OUTPUT: Woof!
+  animal2.speak();              // OUTPUT: Meow!
+  animal3.speak();              // OUTPUT: Moo!
+
+--------------------------------------------------------
+  List<Animal> animals = [Dog(), Cat(), Cow()];
+
+  for (var animal in animals) {
+    animal.speak();
+  }
+
+  OUTPUT:
+    Woof!
+    Meow!
+    Moo!
+
+}

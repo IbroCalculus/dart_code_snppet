@@ -1,3 +1,6 @@
+NB: When working with abstract class, we can either use 'extends' or 'implements' keyword.
+CHECK: 'Classes - Abstract class.txt' for more details.
+
 
 class Vehicle {
     

@@ -11,6 +11,8 @@ routes/
         _middleware.dart
         index.dart
 
+cmd > dart_from new middleware "/"          // This will create a middleware for all routes. ie; Routes/_middleware.dart
+
 
 --------- In _middleware.dart ---------
 

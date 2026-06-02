@@ -1,0 +1,54 @@
+===================== notification_service.dart ======================
+
+abstract class NotificationService {
+  void send(String message);
+}
+
+===================== email_notification.dart =========================
+
+import 'notification_service.dart';
+class EmailNotification extends NotificationService {
+  @override
+  void send(String message) {
+    print("Sending email $message");
+  }
+}
+
+===================== sms_notification.dart =========================
+import 'notification_service.dart';
+class SmsNotification extends  NotificationService {
+  @override
+  void send(String message) {
+    print("Sending sms $message");
+
+  }
+}
+
+===================== user_notifier.dart   (This depends on the notification service) ================
+
+import 'notification_service.dart';
+
+class UserNotifier {
+  final NotificationService notificationService;
+
+  UserNotifier({required this.notificationService});
+
+  void notify(String message){
+    notificationService.send(message);
+  }
+}
+
+===================== main.dart =========================
+
+import 'sms_notification.dart';
+import 'email_notification.dart';
+import 'user_notifier.dart';
+
+void main(){
+  final emailNotifier = UserNotifier(notificationService: EmailNotification());
+  final smsNotifier = UserNotifier(notificationService: SmsNotification());
+
+  emailNotifier.notify("Confirm Email login");
+  smsNotifier.notify("Confirm SMS OTP");
+
+}

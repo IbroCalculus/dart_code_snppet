@@ -1,0 +1,35 @@
+
+====================== TERMS =====================
+Abstraction: The process of hiding unnecessary details and showing only the essential ones.
+             Showing what an object can do while hiding how it does it.
+
+Think about a car:
+  You know how to:
+  start the engine
+  accelerate
+  brake
+
+You don't need to know:
+  how fuel is injected
+  how spark plugs work
+  how the transmission operates
+
+The car exposes a simple interface and hides the complexity. That's abstraction.  
+
+============== Abstraction in Dart =============
+Dart provides abstraction mainly through:
+  Abstract classes
+  Interfaces (every class is an interface in Dart)
+
+
+------------ Abstraction vs Encapsulation -----------
+Abstraction is the process of hiding the implementation details and showing only the functionality to the user. (ie using abstract classes and interfaces)
+Encapsulation is the process of hiding the data and showing only the functionality to the user. (ie using private variables and getters and setters)
+
+For Abstraction, check "Classes - abstract class.txt"
+For Encapsulation, check "Classes - private class.txt"
+
+In other words;
+  Encapsulation = protecting data and controlling how it changes.
+  Abstraction = showing what an object does, hiding how it does it.
+

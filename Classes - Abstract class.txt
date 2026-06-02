@@ -1,26 +1,123 @@
-abstract class Content{
-  final String title;
+NB: When working with abstract class, we can either use 'extends' or 'implements' keyword.
 
-  Content(this.title);
-  
-  void publish();		// Abstract method;
+extends (inheritance):
+A class inherits behavior and structure from a parent class. It can reuse existing method implementations and override them when needed.
+
+implements (interface contract):
+A class must fully define all members of the contract. No implementation is inherited; everything must be explicitly implemented.
+It forces you to implement EVERYTHING from the contract. whether implemented or concrete. except static members.
+It also allows a class to implement multiple interfaces. ie; Example 2 below
+
+
+An interface is a contract that specifies what methods and properties a class must have.
+
+
+================================= Example 1 ====================
+
+abstract class Content{
+
+  static const pi = 3.14;             // Static member not subject to change in implements
+  String userName = 'content';
+
+  void publish();
   void publish2(){
-    print("publish2 method within abstract class. Can't override");
+    print("Content Publishing2 method");
+  }
+  static void publish3(){             // Static method not subject to change in implements
+    print("Content Publishing3 method");
   }
 }
 
-class Post extends Content{
-  Post(super.title);
+------------- Example 1a (Using extends) -----------------
+
+import 'content.dart';
+class Post extends Content {
 
   @override
   void publish() {
-    print("Overrided publish for Post class");
-  } 
-  
+    print('Post published method');
+  }
+
 }
 
+NB: Other members and concrete methods are inherited from Content, but can be overridden if desired, but not compulsory.
+
+
+------------- Example 1b (Using implements) -----------------
+
+class Post2 implements Content {
+  @override
+  String userName = 'post';
+
+  @override
+  void publish() {
+    // TODO: implement publish
+    print("Post2 published method");
+  }
+
+  @override
+  void publish2() {
+    // TODO: implement publish2
+    print("Post2 published2 method");
+  }
+}
+
+NB: All non-static members from content must be overridden.
+
+
+------------- main.dart -----------------
+
 void main(){
-  var post1 = Post("This is an object of post");
-  post1.publish();
-  post1.publish2();  
+
+  Post post1 = Post();
+  Content post2 = Post2();
+
+  post1.publish2();
+  post2.publish2();
+
+  Content.publish3(); 
+}
+
+
+
+====================== EXAMPLE 2  ========
+
+Implement also allows a class to implement multiple interfaces.
+ie; Cow class implements the 3 interfaces; Animal, LandAnimal and FourLeggedAnimal.
+
+
+class Animal{
+  void speak() =>  print('This animal can speak');
+  void eat() => print('This animal can eat');
+}
+
+class LandAnimal {
+  void definition() => print("This is a land animal");
+}
+
+class FourLeggedAnimal{
+  void definition2() => print("This animal has four legs");
+}
+
+
+class Cow implements Animal, LandAnimal, FourLeggedAnimal{
+  @override
+  void eat() {
+    print("This cow can eat");
+  }
+
+  @override
+  void speak() {
+    print("This cow can speak");
+  }
+
+  @override
+  void definition() {
+    // TODO: implement definition
+  }
+
+  @override
+  void definition2() {
+    // TODO: implement definition2
+  }
 }

@@ -2,6 +2,11 @@ The goal of Dart Frog is to help developers effectively build backends in Dart.
 It is the equivalent of express in Node.js or Flask in Python. It is a fast mini framework for building web applications in Dart.
 
 
+=================== DART FROG vs SERVERPOD ==============
+Serverpod is an application server, whereas 
+dart frog is a framework for building web applications. It is a set of tools and libraries for building web applications in Dart.
+
+
 =============== INSTALLATION ===============
  - Have Dart SDK Installed on machine (OR simply Flutter SDK which includes Dart SDK)
  - Run dart pub global activate dart_frog_cli       (INSTALLS GLOBALLY ON MACHINE)

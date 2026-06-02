@@ -1,0 +1,23 @@
+--------------- User2.dart  ----------------
+
+class User2 {
+  String _name;
+
+  User2({required this._name});                        // Modern method
+  // User2({required String name}) : _name = name;     // Alternate older method
+
+  String get name => _name;
+
+  set name(String name) {
+    _name = name;
+  }
+}
+
+--------------- main.dart  ----------------
+
+void main(){
+  User2 user2 = User2(name: "Kalid");
+  print(user2.name);
+  user2.name = "kiki";
+  print(user2.name);
+}

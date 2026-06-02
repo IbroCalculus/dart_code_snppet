@@ -60,4 +60,83 @@ class Rectangle {
 }
 
 
+
 ------- 3. Factory constructors ----------
+
+A factory constructor is a special Dart constructor that doesn't always create a new instance. Instead, it gives you full control over what object to return.
+You can:
+  Return a brand new instance
+  Return an existing (cached) instance
+  Return a subclass instance
+  Return null (if the type is nullable)
+
+
+--------------------- Regular vs Factory Constructor -------------
+Regular constructor:
+  The regular constructor always creates a new instance.
+  Does not use return
+  Uses the this keyword
+
+Factory constructor:
+  The factory constructor can return an existing instance or a new instance. It does not always create a new instance.
+  Uses return
+  Does not use the this keyword
+
+
+
+---------- Example 1 (Return a brand new instance depending on the parameters passed) ----------
+
+class User{
+  String userName;
+  String password;
+
+  User({required this.userName, required this.password}){
+    print("User created of username $userName, and password $password");
+  }
+
+
+  factory User.usingFactory({required String userName, required String password}){
+    if (password.length < 6){
+      String newPassword = "$password@*!%*";
+      return User(userName: userName, password: newPassword);
+    }
+    return User(userName: userName, password: password);
+  }  
+}
+
+void main(){
+  User user = User.usingFactory(userName: "Reuben", password: "123");
+  print("User info: ${user.userName}, ${user.password}");               // OUTPUT: User info: Reuben, 123@*!%*
+
+}
+
+
+----------- Example 2 (Caching / Avoiding Duplicates) ----------
+class User {
+  final String userName;
+  final String password;
+
+  // Regular constructor
+  User(this.userName, this.password);
+
+  // Static cache to store created users
+  static final Map<String, User> _cache = {};
+
+  // Factory constructor
+  factory User.fromCache(String name, String pwd) {
+    if (_cache.containsKey(name)) {
+      print('Returning cached user: $name');
+      return _cache[name]!;
+    }
+    print('Creating new user: $name');
+    final newUser = User(name, pwd);
+    _cache[name] = newUser;
+    return newUser;
+  }
+}
+
+void main() {
+  final u1 = User.fromCache('alice', 'pass1'); // Creates & caches
+  final u2 = User.fromCache('alice', 'newpass'); // Returns cached u1
+  print(identical(u1, u2)); // true
+}

@@ -1,4 +1,6 @@
 
+------------------------ How to create a class --------------------------
+
 class Person{
 
   String name;
