@@ -25,7 +25,7 @@ void main() {
 }
 
 
-================================== E.g 2====================================
+================================== E.g 2 ====================================
 
 
 enum WorkPosition {
@@ -50,4 +50,62 @@ void main() {
   Employee e1 = Employee(name: "John", employeePosition: WorkPosition.engineer);
   final e2 = Employee(name: "Rabiu", employeePosition: WorkPosition.coder);
 
+}
+
+
+
+================================== E.g 3: Enhanced Enum ====================================
+
+enum WorkPosition {
+
+  engineer("Engineer", 5000),
+  coder("Software Developer", 4500),
+  designer("UI/UX Designer", 4000),
+  writer("Content Writer", 3000);
+
+  final String title;
+  final double salary;
+
+  const WorkPosition(this.title, this.salary);
+
+}
+
+
+class Employee {
+  String name;
+  WorkPosition employeePosition;
+
+  Employee ({required this.name, required this.employeePosition});
+}
+
+
+void main(){
+
+  Employee employee1 = Employee(name: "John", employeePosition: WorkPosition.coder);
+  String emp1Title = employee1.employeePosition.title;
+  double emp1Salary = employee1.employeePosition.salary;
+  print("$emp1Title salary is $emp1Salary");
+
+}
+
+
+
+================================== E.g 4: Enhanced Enum ====================================
+
+enum SocialMedia {
+  facebook("Facebook", "https://facebook.com"),
+  whatsapp("WhatsApp", "https://whatsapp.com"),
+  youtube("YouTube", "https://youtube.com");
+
+  final String displayName;
+  final String url;
+
+  const SocialMedia(this.displayName, this.url);
+}
+
+void main() {
+  SocialMedia socialMedia = SocialMedia.youtube;
+
+  print(socialMedia.displayName);
+  print(socialMedia.url);
 }

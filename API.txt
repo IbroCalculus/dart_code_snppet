@@ -8,6 +8,9 @@ API keys provides 2 basic functions:
 -2. Client App Authorizaition: Check whether the calling applicaition have been granted access to the API servers.
    E.g: If API key is invalid, the API server can simply block access of the client application
 
+
+NB: CHECK API.txt in flutter to see how to use model
+
 ------------------------------------------------------------------------------------------------------------
 dependencies:
   http: ^1.1.0

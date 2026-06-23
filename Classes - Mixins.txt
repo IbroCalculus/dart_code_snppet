@@ -1,8 +1,6 @@
-Mixins provide a way to reuse a class's code in multiple class hierarchies, allowing a class to inherit methods and state from multiple sources.
-A mixin in Flutter (and Dart, the language Flutter is built on) is a way to reuse a class's code in multiple class hierarchies. 
+A mixin is a class that contains methods and fields that can be used by other classes.
 Mixins are used to add functionality to a class without using inheritance, allowing for code reuse in a more flexible and modular way.
 
-It is similar to interface
 
 class Aclass{
   void methodA(){
@@ -40,14 +38,6 @@ mixin Dclass{							//NB: mixin
 
 =============================== EXAMPLE 2 ============================
 
-void main(){  
-  Animal animal = Animal();
-  Human human = Human();
-  
-  human.talk();
-  // animal.talk();       // .talk() not available, because the mixin not used in class Animal
-}
-
 mixin Walk{
   void walk(){}
 }
@@ -76,4 +66,13 @@ class Animal with Walk, Reproduce{
  void description(){
    print("This is an animal");
  } 
+}
+
+
+void main(){  
+  Animal animal = Animal();
+  Human human = Human();
+  
+  human.talk();
+  // animal.talk();       // .talk() not available, because the mixin not used in class Animal
 }
