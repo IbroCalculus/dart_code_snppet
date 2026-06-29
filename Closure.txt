@@ -1,0 +1,2 @@
+Confusing concept. 
+It's a function that returns a function.

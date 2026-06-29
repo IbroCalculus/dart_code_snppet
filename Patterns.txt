@@ -1,0 +1,12 @@
+A pattern is a way to match and unpack data (ie a record). They allow for destructuring of data.
+A pattern is a language feature that describes the shape of data. If the data matches that shape, Dart can extract (unpack) values into variables.
+
+E.g:
+
+(String, bool, int) getUserInfo() {
+  return ("Rahul", true, 20);
+}
+
+void main(){
+  final (userName, isMarried, userAge) = getUserInfo();     // The pattern is: (userName, isMarried, userAge)
+}

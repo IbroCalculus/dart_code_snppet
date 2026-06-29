@@ -1,5 +1,6 @@
 
 CHECK ALSO: Callback funtions.txt
+CHECK ALSO: Records.txt
 
 ========================= FUNCTION RETURN VOID ===========================
 void testFunction(){					// void keyword may be omitted

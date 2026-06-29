@@ -15,7 +15,6 @@
   print(names); // Output: {Ibro, Aboy}
 
 
-<<<<<<< HEAD
 =================== SET OPERATIONS =========================
 
   var setA = {1, 2, 3, 4};
@@ -33,8 +32,6 @@
 
 
 
-=======
->>>>>>> 23508097b07a530556bc0a60b06437648315803f
 ------------- If set contains a particular value -----------
   print(myList.contains("Three"));
 

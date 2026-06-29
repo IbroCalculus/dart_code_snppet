@@ -1,0 +1,51 @@
+
+CHECK ALSO: Pattern.txt
+
+
+A record is a special kind of class that is used to group together a number of properties.
+A record allows returning multiple values from a function. (It is similar to a tuple in Python.)
+
+
+-------------------- Positional Record -------------------------------
+
+(String, bool, int) getUserInfo() {
+  return ("Rahul", true, 20);
+}
+
+
+void main(){
+
+  final (userName, isMarried, userAge) = getUserInfo();
+  print("Name: $userName, Married: $isMarried, Age: $userAge");     // OUTPUT: Name: Rahul, Married: true, Age: 25
+
+  print(getUserInfo());
+
+  print(getUserInfo().$1);          // OUTPUT: Rahul
+  print(getUserInfo().$2);          // OUTPUT: true
+  print(getUserInfo().$3);          // OUTPUT: 20
+
+}
+
+
+
+
+-------------------- Named Record -------------------------------
+
+({String name, bool isMarried, int age}) getUserInfo2() {
+  return (name: "Rahul", isMarried: true, age: 20);
+}
+
+void main(){
+
+  final (:name, :isMarried, :age) = getUserInfo2();
+
+  print("Name: $name, Married: $isMarried, Age: $age");
+  //
+  print(getUserInfo2());
+
+  print(getUserInfo2().name);
+  print(getUserInfo2().isMarried);
+  print(getUserInfo2().age);
+
+
+}
