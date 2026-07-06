@@ -1,3 +1,8 @@
+
+CHECK ALSO: Classes - Sealed class.txt
+
+An abstract class is a class that cannot be instantiated. It can have abstract and non-abstract methods.
+
 NB: When working with abstract class, we can either use 'extends' or 'implements' keyword.
 
 extends (inheritance):

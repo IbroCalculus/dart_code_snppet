@@ -1,0 +1,12 @@
+A final class cannot be subclassed.
+
+
+final class User{
+  final String? name; 
+  User({this.name});
+}
+
+// This is wrong because User is final
+class Person extends User{
+  Person({String? name}) : super(name: name);
+}

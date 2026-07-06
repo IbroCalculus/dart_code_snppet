@@ -1,0 +1,36 @@
+CHECK ALSO: Classes - Abstract class.txt
+
+A sealed class is an abstract class that can only be extended, implemented, or mixed in within the same file.
+Better still: A sealed class is an implicitly abstract class whose subclasses are restricted to the same library.
+
+
+E.g
+
+---- baseClass.dart -----------
+
+abstract class Animal {
+  void makeSound();
+}
+
+sealed class Animal2 {
+  void makeSound();
+}
+
+The above class cannot be subclassed in other files.
+ie; 
+
+--------- main.dart ----------
+
+class Dog extends Animal {          // THIS WORKS
+  @override
+  void makeSound() {
+    print('Woof!');
+  }
+}
+
+class Dog extends Animal2 {         // THIS WON'T WORK because it is trying to subclass a sealed class
+  @override
+  void makeSound() {
+    print('Woof!');
+  }
+}

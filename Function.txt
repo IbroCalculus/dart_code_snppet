@@ -79,3 +79,72 @@ String welcome({int? age, required String fName, required String sName}) {
   var response1 = welcome(fName: "Ibrahim", sName: "Suleiman");
   var response2 = welcome(fName: "John", sName: "Doe", age: 67);
 
+
+
+================================== RETURNING A FUNCTION IN A FUNCTION ====================
+
+void main() {
+  var fn = getFunction();
+  fn();
+}
+
+void greet() {
+  print("Hello!");
+}
+
+Function getFunction() {
+  return greet;
+}
+
+---------------------- Similarly (Anonymous function) ------------------
+
+void main() {
+  var fn = getFunction();
+  fn();
+}
+
+Function getFunction(){
+  return (){
+    print("hello world");
+  };
+}
+
+------------------------ With parameters --------------------
+
+void main() {
+  var greet = getGreeter();
+  greet("Ibrahim");
+}
+
+Function getGreeter() {
+  return (String name) {
+    print("Hello $name");
+  };
+}
+
+
+------------------------ With proper return type --------------------
+void main() {
+  var fn = getGreeter();
+  fn("Dart");
+}
+
+void Function(String) getGreeter() {
+  return (String name) {
+    print("Hello $name");
+  };
+}
+
+
+------------------------ With proper return type. E.g: 2 --------------------
+
+void main() {
+  var add = getCalculator();
+  print(add(5, 3));
+}
+
+int Function(int, int) getCalculator() {
+  return (a, b) {
+    return a + b;
+  };
+}

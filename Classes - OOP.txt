@@ -1,0 +1,5 @@
+CHECK: Classes - Abstraction and Encapsulation.txt
+
+"OOP has four pillars: Encapsulation, Abstraction, Inheritance, and Polymorphism."
+
+Object-Oriented Programming (OOP) is a programming style where you model your program as a collection of objects. Each object bundles together its own data (state) and behavior (methods), and objects interact with one another to solve the overall problem.

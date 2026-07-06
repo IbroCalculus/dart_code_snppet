@@ -1,3 +1,84 @@
+------------ List methods and properties ------------
+
+List<String> names = [];                // It creates an empty list.
+names.add("Mike");                      // It adds an element to the end of the list. 
+print(names[0]);                        // It retrieves and prints the element at the specified index.
+names.addAll(["Mike","Joe","Jane"]);    // It adds all elements of the specified collection to the end of the list.
+names.insert(0,"Mike");                 // It inserts at the specified index and move the rest of the elements to the right. DOES NOT REPLACE WHAT WAS THERE.
+names.insertAll(0,["Joe","Jane"]);      // It inserts all elements of the specified collection at the specified index and move the rest of the elements to the right.
+names[0] = "Jasmine"];                  // It replaces the element at the specified index with the specified element.
+names.remove("Mike");                   // It removes the specified element from the list.
+names.removeAt(0);                      // It removes the element at the specified index.
+names.removeLast();
+names.removeRange(0,2);                 // It removes the elements in the specified range.
+names.removeWhere((element) => element == "Ibrahim");
+names.clear();                          // It removes all elements from the list. 
+names.length;                           // It returns the number of elements in the list.
+names.contains("Mike");                 // It returns true if the list contains the specified element.
+print(names.first);                     // It returns the first element in the list.
+names.first = "Doe";                    // It sets the first element in the list. IT REPLACES THE ELEMENT.
+print(names.last);                      // It returns the last element in the list.
+names.last = "Doe";                     // It sets the last element in the list. IT REPLACES THE ELEMENT.
+names.isEmpty;
+names.isNotEmpty;
+names.indexOf("Mike");                  // If not found, returns -1.
+names.join("*");
+
+
+========================= METHODS ASSOCIATED WITH LISTS ======================
+------------- 1: .map()  -------------
+For each element in the list, it runs a function and returns a new list.
+
+  List<String> fruits = ["Apple", "Banana","Orange"];
+  var upper = fruits.map((fruit) => fruit.toUpperCase());       // Returns an iterable. (APPLE, BANANA, ORANGE)
+  print(upper.toList());                                        // Returns a list.
+
+
+-------------- 2. Looping thorugh a list -------------    
+  1. for loop: ie; for(int i = 0; i < fruits.length; i++){ print(fruits[i]); }
+  2. forEach loop: fruits.forEach((fruit) => print(fruit));
+  3. for-in loop: for(String fruit in fruits){ print(fruit); } 
+  4. forEach with index: fruits.asMap().forEach((index, fruit) => print('${index + 1}. $fruit'));
+
+
+-------------- 3. Transforming a list ------------- 
+  - map: (transform each element) -
+  List<int> numbers = [1, 2, 3, 4, 5];
+  List<int> squares = numbers.map((number) => number * number).toList();
+
+  - where: (filters elements) -
+  List<int> evenNumbers = numbers.where((number) => number % 2 == 0).toList();
+  
+  - reduce: -
+  int sum = numbers.reduce((a, b) => a + b);
+  int product = numbers.reduce((a, b) => a * b);
+
+  - Sorting: -
+  List<int> numbers = [45, 55, 23, 11, 90, 1, 2, 3, 4, 5];
+
+  var reversed = numbers.reversed.toList();   // Reverse a list
+  print(reversed);
+  
+  numbers.sort();           // Ascending
+  print(numbers);
+  numbers.sort((a, b) => b.compareTo(a));   // Descending
+  print(numbers);
+
+
+  - filled: -
+  List<String> filled = List.filled(3, "Hello", growable: true);
+  print(filled);    // OUTPUT: [Hello, Hello, Hello]
+
+  - Generate: -
+  List<int> generated = List.generate(3, (index) => index * 2);
+  print(generated); // OUTPUT: [0, 2, 4]
+
+  - Copy list: -
+  List<String> capitals = ["London", "Paris", "Tokyo"];
+  List<String> copiedCapitals = List.from(capitals);
+  print(copiedCapitals);
+
+
 
 ================ CREATING A LIST =============
 

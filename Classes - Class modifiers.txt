@@ -1,0 +1,60 @@
+-------------------- Class modifiers ----------------------
+
+Class modifiers are just access permissions you place on your code. When you write code in File A, you use modifiers to control what developers writing code in File B are allowed to do with your class.
+
+There are only two major actions another file can try to do to your class:
+    extends (Inheritance): They take your class, inherit all your working code/logic, and build on top of it.
+    implements (Interface): They copy only the names of your functions, throw your actual code in the trash, and rewrite the logic from scratch.
+
+---- 1. The Regular class (The No-Rules Open House) ------
+If you don't type any modifier at all, the doors are wide open.
+
+    Can another file extends it? ✅ Yes.
+    Can another file implements it? ✅ Yes.
+    Can you instantiate it (new MyClass())? ✅ Yes.
+
+
+---- 2. abstract class (The Half-Baked Recipe) ------
+Use this when your class is an incomplete idea. It defines what should happen, but doesn't provide all the code to do it. Because it's incomplete, nobody is allowed to create it directly.
+
+    Can another file extends it? ✅ Yes (they inherit whatever code you did write).
+    Can another file implements it? ✅ Yes.
+    Can you instantiate it? ❌ No. (You cannot do var tool = Tool(); if it's abstract).
+
+
+---- 3. base class (The Protected Engine) ------
+Use this when you have written critical, complex logic, and you want to say: "You are welcome to use my class, but you must use my actual code. You are not allowed to throw my logic away and rewrite it."
+
+    Can another file extends it? ✅ Yes. (They inherit your logic).
+    Can another file implements it? ❌ No. (They are blocked from stripping your code away).
+    Can you instantiate it? ✅ Yes.
+
+
+---- 4. interface class (The Hollow Blueprints) ----
+The exact opposite of base. Use this when you want to say: "You can copy the shape and names of my functions, but I forbid you from sneaking into my class and inheriting my actual code."
+
+    Can another file extends it? ❌ No. (Blocked from inheriting your logic).
+    Can another file implements it? ✅ Yes. (They must rewrite the logic themselves).
+    Can you instantiate it? ✅ Yes.
+
+💡 Remember: You can combine #2 and #4! An abstract interface class means they can't instantiate it, they can't extend it, they must implement it. This is a "pure" interface.
+
+
+---- 5. final class (The Total Lockdown) ----
+Use this when you want to close the family tree completely. It says: "This class is done. Nobody outside this file is allowed to extend it, and nobody is allowed to implement it."
+
+    Can another file extends it? ❌ No.
+    Can another file implements it? ❌ No.
+    Can you instantiate it? ✅ Yes.
+
+
+---- 6. sealed class (The Restricted Family) ----
+
+---- 7. mixin class (The  Plug-in) ----
+
+
+
+As of modern Dart (Dart 3+), there are seven class modifiers.
+CHECK: Classes - Class modifiers.png
+
+

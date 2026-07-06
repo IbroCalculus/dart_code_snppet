@@ -1,0 +1,59 @@
+Every normal class is secretly an interface.
+By default, if you create a class called Vehicle, another developer can extend Vehicle (inheritance) OR they can implement Vehicle (interface).
+
+--------- The danger of implement -------------
+When someone implements your class, they are essentially throwing away all your hard work and logic. They are just copying the names of your functions and rewriting the code from scratch.
+
+If you spent months writing a complex framework, you don't want people stripping out your core logic like this. You want to force them to inherit your logic.
+
+---------- How base fixes this -------------
+When you mark a class as base, you are saying: "You are allowed to build on top of my code, but you MUST use my core logic. You cannot reinvent the wheel."
+CHECK: Classes - base.txt
+
+
+----------- Interface ----------
+If the base modifier is a sign that says "You must use my blueprint AND my engine," then the interface modifier is a sign that says "You can use my blueprint, but you have to build your own engine from scratch."
+
+It is the exact mathematical opposite of base.
+
+
+------------ The Core Difference: base vs. interface ---------------
+
+base: Another class can inherit from a base class. But another class cannot implement a base class.
+interface: Another class can implement an interface. But another class cannot inherit from an interface.
+
+
+------------------
+// file: audio_player.dart
+
+interface class AudioPlayer {
+  void play() {
+    print("Playing generic static audio...");
+  }
+  
+  void stop() {
+    print("Stopping audio...");
+  }
+}
+
+If another developer imports your file, here is what happens:
+
+import 'audio_player.dart';
+
+// ❌ THIS WILL CAUSE A COMPILER ERROR
+class SpotifyPlayer extends AudioPlayer {
+  // Error: The class 'AudioPlayer' can't be extended outside of its library.
+}
+
+// ✅ THIS IS PERMITTED
+class YoutubePlayer implements AudioPlayer {
+  @override
+  void play() {
+    print("Streaming video bytes and extracting audio... 🎥");
+  }
+
+  @override
+  void stop() {
+    print("Pausing stream and clearing video buffer.");
+  }
+}

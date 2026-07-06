@@ -26,6 +26,34 @@ void id<T1, T2>(T1 t1, T2 t2) {
 }
 
 
+
+----------------- E.g 3: with return type ----------------
+
+void main() {
+  var result1 = concatValues<int, int>(34, 8);
+  var result2 = concatValues<int, String>(34, "8");
+
+  print(result1);
+  print(result2);
+}
+
+Object? concatValues<T, U>(T a, U b) {
+  if (a is int && b is int) {
+    return a + b;
+  }
+
+  if (a is String && b is String) {
+    return a + b;
+  }
+
+  if (a is String || b is String) {
+    return '$a $b';
+  }
+
+  return null;
+}
+
+
 ====================================== GENERIC CLASS ==========================================
 
 class Person<T>{

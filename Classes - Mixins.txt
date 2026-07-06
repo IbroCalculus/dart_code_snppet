@@ -76,3 +76,30 @@ void main(){
   human.talk();
   // animal.talk();       // .talk() not available, because the mixin not used in class Animal
 }
+
+
+========================== mixin on keyword ==========================
+
+on keyword restricts which classes a mixin can be applied to.
+It also lets the mixin safely use members of that class.
+
+class LivingThing {
+  String animalName = "Jammy";
+}
+
+mixin Communicate on LivingThing {
+  void talk() {
+    print("Talking to $animalName");
+  }
+}
+
+class Animal extends LivingThing with Communicate {
+  void eat() {
+    print("Eating...");
+  }
+}
+
+void main() {
+  final animal = Animal();
+  animal.talk();
+}

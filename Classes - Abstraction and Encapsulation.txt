@@ -33,3 +33,90 @@ In other words;
   Encapsulation = protecting data and controlling how it changes.
   Abstraction = showing what an object does, hiding how it does it.
 
+
+=================================================================================================
+
+-------------------- Encapsulation --------------------
+
+Encapsulation means hiding an object's internal data and protecting it from being messed with directly from the outside. In Dart, we do this by starting a variable or method name with an underscore (_), which makes it private to that library/file.
+
+
+class CoffeeMachine {
+
+  // The underscore makes these private. Outside files can't touch them directly!
+  int _waterAmount = 100; 
+
+  // A public method (the "button" the user presses)
+  void brew() {
+    if (_waterAmount > 20) {
+      _heatWater();
+      _waterAmount -= 20;
+      print("Here is your coffee!");
+    }
+  }
+
+  // A private helper method hidden inside the machine
+  void _heatWater() {
+    print("Heating water to 90°C...");
+  }
+
+}
+
+Why it matters: 
+  If _waterAmount wasn't private, another developer could accidentally write machine.waterAmount = -500; somewhere else in the app, crashing the system. Encapsulation prevents that.
+
+
+-------------------- Abstraction (Hiding the Complexity) --------------------
+
+The Analogy: When you want an espresso, you press the "Espresso" button. You don't need to know the exact water pressure, the mathematical formula for the grind size, or the electrical voltage required. The machine hides that complex implementation behind a simple interface.
+
+In Dart: Abstraction means creating a blueprint that defines what a class should do, without spelling out exactly how it does it yet. We use abstract class for this.
+
+
+// This is a generic blueprint. You can't create a generic "Appliance".
+abstract class Appliance {
+  void turnOn(); // No body! Just a promise that children will implement this.
+}
+
+class Blender extends Appliance {
+  @override
+  void turnOn() {
+    print("Blades spinning fast! 🌪️");
+  }
+}
+
+Why it matters: Abstraction lets you map out how your app works at a high level without getting bogged down in the tiny details right away.
+
+
+-------------------- Polymorphism (Many Forms) --------------------
+In Dart: Polymorphism ("poly" = many, "morph" = form) allows different classes to implement the exact same method name but execute completely different code. We achieve this using inheritance and the @override keyword.
+
+class HotDrinkMaker {
+  void makeDrink() {
+    print("Preparing a hot liquid...");
+  }
+}
+
+class EspressoMachine extends HotDrinkMaker {
+  @override
+  void makeDrink() {
+    print("Extracting rich espresso shot under 9 bars of pressure. ☕");
+  }
+}
+
+class TeaMaker extends HotDrinkMaker {
+  @override
+  void makeDrink() {
+    print("Steeping green tea leaves in hot water. 🍵");
+  }
+}
+
+void main() {
+  // We can treat both machines as generic "HotDrinkMakers"
+  List<HotDrinkMaker> breakRoomMachines = [EspressoMachine(), TeaMaker()];
+
+  for (var machine in breakRoomMachines) {
+    // This exact same line behaves differently for each machine!
+    machine.makeDrink(); 
+  }
+}
