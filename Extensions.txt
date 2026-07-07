@@ -1,0 +1,42 @@
+Extension allows us to add new functionality to an existing type without modifying or inheriting from it.
+
+ie; we can have a custom capitalize function for String type, isEvenNumber function for int types, etc. And use it as such:
+String.capitalize(), int.isEvenNumber(), etc.
+
+
+------------ custom_extensions.dart ---------
+
+extension StringExtension on String {
+
+  String capitalize() {
+    if (this.isEmpty) return this;
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+  }
+
+  String capitalizeEachWord() {
+    if (this.isEmpty) return this;
+    return this
+        .split(' ')
+        .map(
+          (w) =>
+              w.isEmpty ? w : w[0].toUpperCase() + w.substring(1).toLowerCase(),
+        )
+        .join(' ');
+  }
+}
+
+extension NumberExtension on int {
+  bool isEvenNumber() {
+    return this % 2 == 0;
+  }
+}
+
+
+
+--------------------- main.dart -----------------
+
+void main() {
+  print('ibrahim'.capitalize());
+  print('Hello World'.capitalizeEachWord());
+  print(5.isEvenNumber());
+}

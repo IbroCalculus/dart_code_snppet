@@ -1,4 +1,7 @@
 
+CHECK ALSO: Extensions.txt
+
+
 Accepts both single and double quotes. Single is recommended.
 
 ---- Concatenation ----
