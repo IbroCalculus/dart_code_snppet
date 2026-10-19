@@ -1,0 +1,28 @@
+
+dependencies:
+  flutter_svg: ^2.0.9
+
+--- Assume svg file is in folder: assets -> svg -> ic_home.svg ----
+in pubspec.yaml: 
+
+  assets:
+     - assets/svg/.
+
+
+---- Usage ----
+            BottomNavigationBarItem(
+              label: "Account",
+                icon: SvgPicture.asset(
+                    ('assets/svg/ic_home.svg')
+                )
+            ),
+
+
+---------------------
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.amberAccent
+              ),
+              child: SvgPicture.asset("assets/svgs/acid.svg", width: MediaQuery.of(context).size.width,),
+            ),

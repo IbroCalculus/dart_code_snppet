@@ -1,0 +1,77 @@
+=================== What is Flutter? ===================
+Flutter is a declarative, multi-platform UI framework written in Dart; heavily supported by Google.
+
+----------- Explanation -----------
+1. Declarative: 
+In a declarative framework, you describe what the UI should look like for a given state, rather than manually scripting the steps to change it.
+
+Imperative (traditional approach): You find an existing UI element and mutate it step-by-step.
+    // Imperative pseudo-code
+    button.setColor(Colors.red);
+    button.setText("Submitted");
+
+Declarative (Flutter): The UI is a pure reflection of current application state ($UI = f(state)$). When state changes, Flutter reconstructs the widget tree to match the new state.
+
+    // Flutter declarative approach
+    return ElevatedButton(
+    style: ButtonStyle(backgroundColor: isSubmitted ? Colors.green : Colors.blue),
+    child: Text(isSubmitted ? 'Submitted' : 'Submit'),
+    );
+
+
+2. Multi-Platform
+Multi-platform means writing a single codebase that runs natively across distinct operating systems and target form factors.
+Instead of wrapping web views or converting widgets into native OS controls, Flutter ships with its own rendering engine (Impeller/Skia). It paints every pixel directly onto a canvas across:
+
+    Mobile: iOS and Android
+    Desktop: macOS, Windows, and Linux
+    Web: Browsers via HTML/Canvas/WebAssembly
+    Embedded devices: Automotive screens, smart displays, IoT devices
+
+
+3. UI Framework
+A UI framework is a cohesive collection of pre-built components, architectural tools, layout engines, and event systems designed specifically to build user interfaces.
+
+Widget Tree: In Flutter, virtually everything is a widget—structural elements (buttons, text), layouts (Column, Stack), styling (Padding, Theme), and even interaction handlers (GestureDetector).
+
+Rendering Pipeline: It includes built-in systems for layout measurement, paint passes, gesture arbitration, and animations out of the box.
+
+4. Written in Dart
+Flutter's framework layer and application logic are built using Dart, an object-oriented, class-based language created by Google.
+
+Dart provides two critical compilation modes that power Flutter's development cycle:
+
+    - JIT (Just-In-Time) Compilation: Compiles code on the fly during development, enabling Hot Reload (instant code updates on the device without losing application state).
+
+    - AOT (Ahead-Of-Time) Compilation: Compiles directly into native machine code (ARM, x86/x64) for production releases, eliminating bridge overhead and delivering smooth 60–120 FPS performance.
+
+-----------------------------------
+Flutter is an open-source UI software development kit (SDK) maintained by Google.
+
+Flutter is a mobile app development framework that allows developers to build beautiful, high-performance apps for iOS and Android using a single codebase. It uses Dart, a programming language developed by Google, to compile to native code for each platform.
+
+Flutter provides ready-made building blocks such as Scaffold, AppBar, Text, Column, and ElevatedButton.
+Instead of manually drawing every element, you describe the interface using Dart code and Flutter handles the work of composing, laying out, and rendering it.
+
+For example:
+    const Text('Hello, Flutter!');
+
+This code describes a text widget. It does not, by itself, draw pixels on the screen. Flutter must incorporate that widget into an application, calculate its layout, and render the result.
+
+Flutter is a declarative, multi-platform UI framework written in Dart; heavily supported by Google.
+
+
+
+===================== The three major parts of Flutter =====================
+----- Flutter framework -------
+This is the collection of Dart libraries you primarily work with. It includes widgets, layout, gestures, animation, Material and Cupertino components, and other UI facilities.
+When you write Scaffold(...), Column(...), or setState(...), you are working with framework APIs.
+
+------ Flutter engine -------
+The engine handles lower-level work such as graphics rendering, text processing, and communicating with the framework. It includes components for drawing the interface and coordinating with the underlying platform.
+You rarely interact with the engine directly when developing ordinary Flutter applications.
+
+------ Embedder --------
+The embedder connects the Flutter engine to its host operating system. It handles platform-specific responsibilities such as setting up the application surface, event integration, and coordinating with the operating system.
+For example, Android and iOS need different platform integration even when much of your Dart application code is shared.
+

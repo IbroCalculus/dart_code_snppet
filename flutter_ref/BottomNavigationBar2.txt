@@ -1,0 +1,128 @@
+CHECK ALSO: PersistentFootButton.txt
+
+
+import 'package:flutter/material.dart';
+
+class DemoPage extends StatefulWidget {
+  const DemoPage({super.key});
+
+  @override
+  State<DemoPage> createState() => _DemoPageState();
+}
+
+class _DemoPageState extends State<DemoPage> {
+  int index = 0;
+
+  void updateIndex(int newIndex) {
+    setState(() {
+      index = newIndex;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: IndexedStackWidget(index: index),
+      ),
+
+      bottomNavigationBar: BottomNavigationBarWidget(
+        currentIndex: index,
+        onTap: updateIndex,
+      ),
+    );
+  }
+}
+
+class BottomNavigationBarWidget extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const BottomNavigationBarWidget({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      onTap: onTap,
+
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Search',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Profile',
+        ),
+      ],
+    );
+  }
+}
+
+
+
+class IndexedStackWidget extends StatelessWidget {
+  final int index;
+
+  const IndexedStackWidget({
+    super.key,
+    required this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: IndexedStack(
+        index: index,
+        children: const [
+          HomePage(),
+          SearchPage(),
+          ProfilePage(),
+        ],
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Home Page', style: TextStyle(fontSize: 20)),
+    );
+  }
+}
+
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Search Page', style: TextStyle(fontSize: 20)),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Profile Page', style: TextStyle(fontSize: 20)),
+    );
+  }
+}

@@ -1,0 +1,39 @@
+----------------- Colors -----------------------
+
+          backgroundColor: Color(0xFF9BA0AB),
+          backgroundColor: Colors.red.withOpacity(0.5),
+          backgroundColor: Colors.red[600], //The [600] is the strength of the red
+          backgroundColor: Color.fromARGB(255, 155, 160, 171);		// 255 means full opacity
+          backgroundColor: Color.fromRGBO(155, 160, 171, 1.0);		// 1.0 means full opacity
+
+
+
+E.g:
+        appBar: AppBar(
+          title: Text("First Flutter App"),
+          centerTitle: true,
+          backgroundColor: Colors.red[600],  //The [600] is the strength of the red
+
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: null,
+          child: Icon(Icons.add),
+          backgroundColor: Colors.red[600],
+
+
+------------------ Gradient -----------------------
+
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomRight,
+                    colors: [
+                      Colors.black.withOpacity(1),
+                      Colors.black.withOpacity(0),
+                    ],
+                  ),
+                ),
+	      ),
+
+
+

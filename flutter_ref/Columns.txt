@@ -1,0 +1,74 @@
+NB: IntrinsicWidth: Wrapping a Column with this widget makes it take the width of its tallest child.
+    It gives all the row children same width, by stretching them to match the width of the maximum.
+
+    mainAxisAlignment: MainAxisAlignment.stretch, is important for that.
+
+    ---------------- Example --------------------
+
+      IntrinsicWidth(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Container(
+              color: Colors.red,
+              width: 50, // This child is short
+              child: const Center(child: Text("Short", style: TextStyle(color: Colors.white))),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.green,
+              width: 100, // This child is tall
+              child: const Center(child: Text("Tall", style: TextStyle(color: Colors.white))),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.blue,
+              width: 30, // This child is shorter
+              child: const Center(child: Text("Short", style: TextStyle(color: Colors.white))),
+            ),
+          ),
+        ],
+      ),
+    ),
+
+
+ ================ Wrapping Widgets inside a column (Stack widgets vertically) =============
+CHECK ALSO: SizedBox.txt
+CHECK ALSO: Flex.txt
+
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,   //This will align children to the center
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  if (state == 0) {
+                    setState(() {
+                      buttonText = 'Switch ON';
+                      state = 1;
+                    });
+                  } else if (state == 1) {
+                    setState(() {
+                      buttonText = 'Turn OFF';
+                      state = 0;
+                    });
+                  }
+                },
+                child: Text(buttonText),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Fluttertoast.showToast(
+                      msg: "You clicked on Second Button",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                  );
+                },
+                child: const Text('Second Button'),
+              ),
+            ],
+          ),
+        ),

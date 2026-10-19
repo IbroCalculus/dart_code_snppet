@@ -1,0 +1,110 @@
+
+  go_router: ^14.8.1
+
+
+--------------- main.dart ---------------
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test_app1/pages/home_page.dart';
+import 'package:flutter_test_app1/pages/map_page.dart';
+import 'package:flutter_test_app1/pages/nav_page.dart';
+import 'package:flutter_test_app1/pages/practice_page.dart';
+import 'package:go_router/go_router.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+
+// ---- The route configuration. ----
+
+final GoRouter _router = GoRouter(
+
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomePage();
+      },
+      routes: <RouteBase>[
+
+        GoRoute(
+          path: '/map_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const MapPage();
+          },
+        ),
+
+        GoRoute(
+          path: '/practice_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const PracticePage();
+          },
+        ),
+
+        GoRoute(
+          path: '/nav_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const NavPage();
+          },
+        ),
+      ],
+    ),
+  ],
+);
+
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return MaterialApp.router(					// ============== HERE =================
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
+        primarySwatch: Colors.blue,
+      ),
+      routerConfig: _router,					// ============== HERE =================
+    );
+  }
+}
+
+
+
+--------------------------- Usage ----------------------------------
+
+
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            
+            ElevatedButton(
+              onPressed: () {
+                context.go('/practice_page');
+              },
+              child: Text('Practice Page'),
+            ),
+            
+            ElevatedButton(
+              onPressed: () {
+                context.go('/map_page');
+              },
+              child: Text('Map Page'),
+            ),
+            
+            ElevatedButton(
+              onPressed: () {
+                context.go('/nav_page');
+              },
+              child: Text('Navigation Page'),
+            ),
+          ],
+        ),
+      ),
+

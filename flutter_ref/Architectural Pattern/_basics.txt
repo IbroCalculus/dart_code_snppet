@@ -1,0 +1,181 @@
+NB: What exactly is a Model, Service, Repository, Provider, and Screen, and how data flows between them in a simple Flutter application.    
+    CHECK their respective .txt files.
+
+
+
+=============== FILES/FOLDERS ORGANIZATION vs ARCHITECTURAL PATTERNS ===============
+
+Organizing files and folders is technically called Project Organization or Directory Structure or Project Structure or Folder Architecture
+An Architectural Pattern (like MVC, MVVM, BLoC, or Clean Architecture) refers to how you separate your logic, data, and UI responsibilities in the code.
+However, the two are deeply intertwined. Your folder structure is almost always a direct visual representation of your chosen architectural pattern.
+
+
+=============== What is an architectural pattern? ===============
+
+An architectural pattern is a standard way of organizing code in an application.
+
+It defines:
+    how different parts of the app are separated
+    how those parts communicate
+    where specific logic should live
+
+Think of it as a blueprint for structuring software.
+
+=================== Common Architectural Patterns (Code design patterns) ==============
+
+
+    Pattern	                        Meaning
+    MVC	                            Model View Controller
+    MVVM	                        Model View ViewModel
+    MVP	                            Model View Presenter
+    Clean Architecture	            Layered architecture emphasizing independence
+    BLoC Architecture	            Business Logic Component
+    Redux	                        Centralized immutable state
+    Flux	                        Unidirectional data flow
+
+
+
+====================== Folder/ File Structure architecture ==========================
+
+1. Basic (worst): Everything inside the main.dart file
+
+2. Layered architecture (Type-based Organization): layered architecture is about separating by responsibility.
+   This is common in small to medium sized projects.
+    
+    lib/
+    ├── components/
+    │   ├── post_card_component.dart
+    │   └── user_detail_component.dart
+    │
+    ├── models/
+    │   ├── post_model.dart
+    │   └── user_model.dart
+    │
+    ├── providers/
+    │   ├── post_provider.dart
+    │   └── user_provider.dart
+    │
+    ├── services/
+    │   ├── post_service.dart
+    │   └── user_service.dart
+    │
+    ├── screens/
+    │   ├── post_list_screen.dart
+    │   └── user_list_screen.dart
+    │
+    └── main.dart
+
+The key idea is:
+    models → Data structures
+    services → API/database operations
+    providers → State management
+    screens → UI pages
+    components/widgets → Reusable UI pieces
+
+
+3. Feature-based architecture: Instead of grouping files by type, you group them by feature. 
+    Imagine your app has: Posts, Users, Authentication
+
+The structure becomes:
+
+    lib/
+    ├── features/
+    │   ├── posts/
+    │   │   ├── models/
+    │   │   │   └── post_model.dart
+    │   │   │
+    │   │   ├── services/
+    │   │   │   └── post_service.dart
+    │   │   │
+    │   │   ├── providers/
+    │   │   │   └── post_provider.dart
+    │   │   │
+    │   │   ├── widgets/
+    │   │   │   └── post_card.dart
+    │   │   │
+    │   │   └── screens/
+    │   │       └── post_list_screen.dart
+    │   │
+    │   ├── users/
+    │   │   ├── models/
+    │   │   │   └── user_model.dart
+    │   │   │
+    │   │   ├── services/
+    │   │   │   └── user_service.dart
+    │   │   │
+    │   │   ├── providers/
+    │   │   │   └── user_provider.dart
+    │   │   │
+    │   │   ├── widgets/
+    │   │   │   └── user_card.dart
+    │   │   │
+    │   │   └── screens/
+    │   │       └── user_list_screen.dart
+    │   │
+    │   └── auth/
+    │       ├── models/
+    │       ├── services/
+    │       ├── providers/
+    │       ├── widgets/
+    │       └── screens/
+    │
+    ├── core/
+    │   ├── constants/
+    │   ├── utilities/
+    │   └── theme/
+    │
+    └── main.dart
+
+4. Clean Architecture: 
+Let's imagine a simple app that displays posts from an API. A typical Clean Architecture structure might look like this:
+
+    lib/
+    ├── core/
+    │   ├── network/
+    │   │   └── api_client.dart
+    │   │
+    │   ├── constants/
+    │   │   └── app_constants.dart
+    │   │
+    │   ├── errors/
+    │   │   └── failures.dart
+    │   │
+    │   └── utils/
+    │       └── helpers.dart
+    │
+    ├── features/
+    │   └── posts/
+    │       │
+    │       ├── data/
+    │       │   ├── models/
+    │       │   │   └── post_model.dart
+    │       │   │
+    │       │   ├── datasources/
+    │       │   │   └── post_remote_datasource.dart
+    │       │   │
+    │       │   ├── repositories/
+    │       │   │   └── post_repository_impl.dart
+    │       │
+    │       ├── domain/
+    │       │   ├── entities/
+    │       │   │   └── post.dart
+    │       │   │
+    │       │   ├── repositories/
+    │       │   │   └── post_repository.dart
+    │       │   │
+    │       │   └── usecases/
+    │       │       └── get_posts.dart
+    │       │
+    │       ├── presentation/
+    │       │   ├── providers/
+    │       │   │   └── post_provider.dart
+    │       │   │
+    │       │   ├── screens/
+    │       │   │   └── post_screen.dart
+    │       │   │
+    │       │   └── widgets/
+    │       │       └── post_card.dart
+    │       │
+    │       └── dependency_injection.dart
+    │
+    └── main.dart

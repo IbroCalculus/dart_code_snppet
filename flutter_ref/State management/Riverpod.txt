@@ -1,0 +1,170 @@
+
+CHECK: Async State management down this file 
+
+With Riverpod:
+    State changes
+          ↓
+    Provider updates
+          ↓
+    ref.watch() detects change
+          ↓
+    Widget rebuilds
+
+
+====================== RIVERPOD THEORY ======================
+--------------- Why Riverpod, since Provider works? ---------------
+Riverpod was created to solve the problem of Provider.
+
+1. Riverpod removes dependency on build context
+    context.watch<UserProvider>()           // Provider
+    ref.watch(userProvider)                 // Riverpod   (No BuildContext)
+
+2. It catches runtime errors (Ask AI)
+3. Uses ProviderScope which is effiecient equivalent of MultiProvider.
+
+4. ref.watch()
+   ref.read()
+   Consumer (or ConsumerWidget)
+
+
+
+Two methods to create providers in riverpod:
+Riverpod.txt, the manual method
+Riverpod2.txt, modern Riverpod code-generation approach
+
+========================= Creating a counter app using Riverpod ============================
+
+Folder Structure (Recommended):
+
+lib/
+│
+├── main.dart
+├── providers/
+│   └── counter_provider.dart
+├── pages/
+│   └── counter_page.dart
+
+
+-------------------------------------------------------------------------------------------------
+
+dependencies:
+  flutter_riverpod: ^3.3.1
+
+
+------------------------    main.dart    ------------------------------
+
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+
+
+
+------------------------ providers/counter_provider.dart ---------------------
+
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+
+final counterProvider = NotifierProvider<Counter, int>(Counter.new);      // Provider
+
+
+//STATE NOTIFIER
+class Counter extends Notifier<int> {
+
+  @override
+  int build() {
+    return 0;                   // INITIAL VALUE OF STATE
+  }
+
+  void increment() {
+    state++;
+  }
+
+  void decrement() {
+    state--;
+  }
+
+  void reset() {
+    state = 0;
+  }
+}
+
+
+------------------------ home_page.dart ------------------------------
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_prac2/providers/counter_provider.dart';
+
+class HomePage extends ConsumerWidget {           	            // NB: THIS now extends ConsumerWidget instead of Stateless widget
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {           // ====== THIS ie Widget ref
+    
+    final counter = ref.watch(counterProvider);                 // ====== THIS ie ref.watch
+
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 20,
+            children: [
+
+              Text("$counter",),
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 10,
+                children: [
+                  
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.read(counterProvider.notifier).increment();
+                    },
+                    child: const Text("Increment"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.read(counterProvider.notifier).decrement();
+                    },
+                    child: const Text("Decrement"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.read(counterProvider.notifier).reset();
+                    },
+                    child: const Text("Reset"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+========================== Async State management (Riverpod) ======================
+
+------------ The lifecycle ---------
+fetch()
+     ↓
+AsyncNotifier
+     ↓
+AsyncValue.loading
+     ↓
+UI
+
+------------------------------------

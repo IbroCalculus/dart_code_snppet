@@ -1,0 +1,214 @@
+CHECK ALSO: BottomNavigationBar2.txt (Use this as a default template for your projects. Copy and paste)
+            BottomNavigationBar3.txt is for more insight, using IndexedStack(...) vs body: navPages[currentPageIndex]. IndexedStack is better.
+            
+CHECK ALSO: PersistentFootButton.txt
+
+NB: The best seem to be from flutter https://api.flutter.dev/flutter/material/NavigationBar-class.html. CHECK IT IN BottomNavigationBar3.txt
+
+
+class _MainPageState extends State<MainPage> {
+  int currentTabIndex = 0;
+
+        bottomNavigationBar: BottomNavigationBar(
+
+          items: const [
+            BottomNavigationBarItem(
+              label: 'Home',
+                icon: Icon(
+                  Icons.home_filled
+                )
+            ),
+
+            BottomNavigationBarItem(
+              label: "Account",
+                icon: Icon(
+                    Icons.account_circle_rounded
+                )
+            ),
+          ],
+      	  showSelectedLabels: false,		//These two are optional and true by default.
+      	  showUnselectedLabels: false,
+          currentIndex: currentTabIndex   //The currently selected item. By default it is 0
+        ),
+
+============== SAME AS ABOVE, BUT FORMATTED ======================
+
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+                label: 'Photo', icon: Icon(Icons.add_a_photo_outlined)),
+            BottomNavigationBarItem(
+                label: 'Access', icon: Icon(Icons.access_time_outlined)),
+            BottomNavigationBarItem(
+                label: "Account", icon: Icon(Icons.account_circle_rounded)),
+          ],
+      	  backgroundColor: Colors.amber,
+      	  type: BottomNavigationBarType.shifting,	// The nav icons will have shift animation when one is clicked. NB: Give icons color.
+      	  showSelectedLabels: false,			// These two are optional and true by default.
+      	  showUnselectedLabels: false,
+          selectedItemColor: Colors.red,
+          currentIndex: currentTabIndex   //The currently selected item. By default it is 0
+
+          onTap: (index){
+            print(index);
+            setState(() {
+          	currentTabIndex = index;
+              	if(currentTabIndex == 0){
+                  print('Photo');
+              	}
+              else if(currentTabIndex == 1){
+                print('Access');
+              }
+              else{
+                print('Account');
+              }
+            });
+          },
+        ),
+
+
+
+=============== SWITCHING SCREENS ON TAB BOTTOM NAVATION BAR (Without PageView (ViewPager) functionality ====================
+
+Assume there are 3 pages, ie; HomeTab(), EcommerceTab(), CartTab();
+NB: If the other pages have appBar, and this bottomNav page also have appBar, That will be double appBar displayed on the appBar page. So, the 3 pages should not have appBar each.
+
+--- In HomePage(); ---
+
+class _DashboardState extends State<Dashboard> {
+  int currentTabIndex = 0;
+
+    return Scaffold(
+      body: IndexedStack(			// ALTERNATIVELY, USE body: navPages[currentPageIndex], CHECK BELOW TO SEE USAGE
+        index: currentTabIndex,
+        children: [
+          HomeTab(),
+          EcommerceTab(),
+          CartTab()
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.red,
+        items: const [
+          BottomNavigationBarItem(
+              label: 'Home', icon: Icon(Icons.home)),
+          BottomNavigationBarItem(
+              label: 'Ecommerce', icon: Icon(Icons.shopping_bag)),
+          BottomNavigationBarItem(
+              label: "Cart", icon: Icon(Icons.shopping_cart_outlined)),
+        ],
+        currentIndex: currentTabIndex,
+        onTap: (value) {
+          setState(() {
+            currentTabIndex = value;
+            switch (currentTabIndex) {
+              case 0:
+                print("Home selected");
+                break;
+              case 1:
+                print("Ecommerce selected");
+                break;
+              case 2:
+                print("Cart selected!");
+                break;
+              default:
+                print("Nothing selected");
+            }
+          });
+        },
+      ),
+    );
+
+--------------- The pages ---------
+import 'package:flutter/material.dart';
+
+class HomeTab extends StatelessWidget {
+  const HomeTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text("Welcome to HomeTab"),
+      ),
+    );
+  }
+}
+
+
+=============== SWITCHING SCREENS ON TAB BUTON PRESSED AND ALSO BY SLIDING (ie ViewPager in android) ====================
+
+
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+
+  int currentTabIndex = 0;
+  final PageController _pageController = PageController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            currentTabIndex = index;
+          });
+        },
+        children: [
+          HomeTab(),
+          EcommerceTab(),
+          CartTab(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.red,
+        items: const [
+          BottomNavigationBarItem(
+              label: 'Home', icon: Icon(Icons.home)),
+          BottomNavigationBarItem(
+              label: 'Ecommerce', icon: Icon(Icons.shopping_bag)),
+          BottomNavigationBarItem(
+              label: "Cart", icon: Icon(Icons.shopping_cart_outlined)),
+        ],
+        currentIndex: currentTabIndex,
+        onTap: (value) {
+          setState(() {
+            currentTabIndex = value;
+            _pageController.animateToPage(
+              value,
+              duration: Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          });
+        },
+      ),
+    );
+  }
+
+}
+
+
+=============== ALTERNATIVE TO body: IndexedStack( ===================
+
+class _HomepageState extends State<Homepage> {
+
+  int currentPageIndex = 0;
+  List<Widget> navPages = <Widget>[
+    const HomeNavPage(),
+    const NotificationsNavPage(),
+    const MessagesNavPage(),
+    CounterPage(),
+  ];
+
+
+  @override
+  Widget build(BuildContext context) {
+
+      body: navPages[currentPageIndex],

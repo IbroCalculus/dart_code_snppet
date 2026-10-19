@@ -1,0 +1,9 @@
+AI packages:
+
+firebase_ai -> Talk to model
+flutter_ai_toolkit -> build AI Chat experience
+
+
+================= To build AI Chat experience =================
+use firebase_ai
+on firebase console, create project -> AI services -> AI logic -> Get started -> Gemini Developer API

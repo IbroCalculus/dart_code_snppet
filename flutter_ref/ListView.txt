@@ -1,0 +1,52 @@
+
+CHECK ALSO: ReoderListView.txt 
+CHECK ALSO: ListBuilder.txt
+CHECK ALSO: ListWheelScrollView.txt
+CHECK ALSO: Sliver.txt
+
+
+There's static listview, as well as dynamic listview.
+This is for static, check ListView2 for dynamic.
+
+
+========== STATIC LISTVIEW =============
+
+      body: Container(
+
+        child: ListView(
+          itemExtent: 200.0,  // Spacing between ListTiles
+          shrinkWrap: true,  // if true ListView will wrapcontent in height, else it match-parent.
+
+
+          children: [
+            ListTile(
+              leading: Icon(Icons.alarm_on_sharp),
+              leading: CircleAvatar(child: Icon(Icons.alarm_on_sharp)),
+              title: Text("Sales"),
+              subtitle: Text("Sales of the weeek"),
+              trailing: Icon(Icons.add),
+              tileColor: Colors.blueGrey,
+              onTap: (){},
+	      
+	      // Styling the ListTile	
+              tileColor: Colors.black12,
+              shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: BorderSide(
+                  width: 1.0,
+                  color: Colors.blue
+                )
+              ),
+            ),
+
+            ListTile(
+              leading: Icon(Icons.alarm_on_sharp),
+              title: Text("Sales"),
+              subtitle: Text("Sales of the weeek"),
+              trailing: Text("3,500"),
+              onTap: (){},
+            ),
+
+          ],
+        ),
+      ),

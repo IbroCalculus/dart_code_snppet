@@ -1,0 +1,168 @@
+
+CHECK ALSO: Stateful Widget.txt for lifecycle
+
+
+====================== STATE ================
+
+State refers to any data that can change during the lifecycle of an app or widget and whose changes should be reflected in the UI.
+State is data that changes over time and affects what the user sees or how the app behaves.
+
+As a rule of thumb:
+    If changing a value should change what the user sees, it's state.
+    If changing a value should change what the app does, it's also state.
+
+
+======================== STATE MANAGEMENT ========================
+
+State management is how Flutter handles and maintains state. ie; changes in an app, such as UI updates, user interactions, and data modifications.
+
+--- The analogy of state management ---
+
+State changes
+       │
+       ▼
+Flutter is notified
+       │
+       ▼
+Relevant widgets rebuild
+       │
+       ▼
+User sees the updated UI
+
+That middle step—notifying Flutter—is what state management is fundamentally about.
+
+
+------------------- Proper defintion of state management --------------
+
+State management is the process of storing state, updating state, and notifying Flutter so the appropriate parts of the UI rebuild when that state changes.
+State management is not a package. It's the discipline of deciding where state lives and how it flows through your widget tree. Provider, Riverpod, Bloc, etc., are just tools that help implement those ideas in larger applications.
+
+Notice there are three responsibilities, not just one:
+    Store the state.
+    Update the state.
+    Notify Flutter that the state changed.
+
+
+Every state management solution, whether it's: setState, Provider, Riverpod, BLoC, MobX, Redux, or anything else, solves these same three problems. They just do it in different ways and with different trade-offs.
+State management libraries like Provider, Riverpod, etc exists to help with state management and avoid problems such as prop drilling.
+
+
+The core mechanism behind local state management in Flutter is:
+    State changes.
+    Flutter is notified.
+    Flutter rebuilds.
+    The UI reflects the new state.
+
+The only difference between these approaches is how Flutter gets notified.
+
+
+----------------------- A Common Misconception -----------------------
+
+Many beginners think state management is about packages like: Provider, Riverpod, BLoC, GetX. It is not.
+Those are tools for state management. State management itself is a concept.
+
+It's similar to transportation:
+    Transportation is the concept.
+    Cars, buses, trains, and airplanes are different implementations.
+
+Likewise:
+    State management is the concept.
+    setState, Provider, Riverpod, and BLoC are different implementations.
+
+
+
+
+
+
+======================= Types of State in Flutter: =======================
+
+------ 1. Ephemeral State or Local State (aslo called UI State) ------
+This is state that exists only within a single widget and does not need to be shared widely.
+Local state is state that belongs to a single widget (or a small part of the widget tree) and is only needed there.
+
+Examples:
+    Whether a checkbox is checked
+    Current tab index
+    Password visibility toggle
+    Animation progress
+    TextField input
+
+They are usually managed with StatefulWidget and setState()
+
+Example:
+
+    bool isDark = false;
+
+    setState(() {
+        isDark = true;
+    });
+
+------ 2.App State (Shared/Global State) ------
+This is state shared across multiple parts of the app.
+Shared state is state that is needed by multiple widgets, multiple screens, or different parts of the app.
+
+Examples:
+    Logged-in user
+    Shopping cart
+    App Theme mode (light/dart)
+    Notifications
+    API data
+    Authentication state
+
+They are usually managed with state management solutions like:Provider, Riverpod, Bloc, GetX, Redux.
+
+
+NB: There are also two other types of states:
+    1. Temporary state: which is state that is only needed for a short period while the user is interacting with the UI. 
+    Once the interaction ends, the state is usually discarded. 
+    E.g: password visibility toggle, expansion tile, selected tab, etc.
+
+
+    2. App state: App state is information that should continue to exist because the app depends on it, often across multiple screens or even across app launches.
+    
+    Compare to:
+    Local state: State that is only needed by a single widget or screen.
+    Global state: State that is needed by multiple widgets or screens.
+
+    Local vs Shared asks: Who needs this state?
+    Temporary vs App asks: How long should this state live?
+
+
+
+==================== Lifting State Up =======================
+It is a state management pattern where the state is lifted up to the nearest common ancestor of the components that need it.
+In other words, it is a common rule in flutter which states that if multiple child widgets need the same piece of state, move the state to their nearest common parent.
+
+
+
+Popular State Management Approaches:
+
+State Management			Description												Use Case
+
+setState()				Built-in Flutter method for local UI updates.							Small apps, simple UI updates.
+Provider				Official Flutter-recommended state management; efficient dependency injection.			Medium to large apps, scalable.
+Riverpod				An improved version of Provider with better performance and modularity.				Large, modular apps, recommended for maintainability.
+Bloc (Business Logic Component)		Uses streams for predictable state management and separation of concerns.			Enterprise-level apps, scalable apps.
+GetX					Lightweight, simple, and fast. Provides dependency injection and state management.		Small to medium apps, simple projects.
+Redux					Centralized state management, inspired by React Redux.						Complex apps with high predictability needs.
+MobX					Reactive state management based on observables.							Apps requiring fine-grained reactivity.
+
+
+Which One Should You Choose?
+✅ For small apps → setState(), GetX
+✅ For medium apps → Provider, Riverpod
+✅ For large-scale apps → Bloc, Clean Architecture (with Riverpod or Provider)
+
+
+============================== Terms Associated with state management ======================
+
+------------------ 1. Reactive state management ------------------
+This is a programming approach where the UI automatically updates whenever the state changes.
+
+Instead of manually telling the UI:  "Hey, rebuild this widget because the data changed,"
+you declare: "This UI depends on this state."
+
+Then the framework watches that state and rebuilds automatically when the state changes.
+
+E.g: Without reactive state management, we use setState() to update the UI. 
+     But with reactive state management, we just declare that our UI depends on a state.

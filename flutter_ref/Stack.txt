@@ -1,0 +1,66 @@
+
+CHECK ALSO: IndexedStack.txt
+
+
+      body: Stack(
+        alignment: AlignmentDirectional.center,		// alignment: Alignment.center,
+        // textDirection: TextDirection.rtl,	(ltr by default)
+
+        children: [
+          Container(height: 200, width: 200, color: Colors.black,),
+          Container(height: 100, width: 100, color: Colors.red,),
+          Container(height: 50, width: 50, color: Colors.yellow,),
+        ],
+      ),
+
+NB: Yellow will be topmost.
+
+NB: You can wrap each items within the stack (ie Container in this case) with Positioned widget and give it any desired position. ie;
+
+        children: [
+          Container(height: 200, width: 200, color: Colors.black,),
+	Positioned(
+		bottom: 0,
+		bottom: 20,
+		child: Container(height: 100, width: 100, color: Colors.red,),
+	)          
+          Container(height: 50, width: 50, color: Colors.yellow,),
+        ],
+
+	Positioned(
+		child: Container(
+		)
+	)
+
+==================== Clip behaviours works with widget that a being cliped out of the stack, ie when using -ve value for position within Positioned widget ================
+
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      clipBehavior: Clip.none,		// THIS. Clip.antiAlias by default.
+
+        Positioned(
+          bottom: -50,			// THIS
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.headphones,
+              size: 80.0,
+              color: Colors.blue,
+            ),
+          ),
+        )
+
+================== TO CENTER A SINGLE WIDGET within the stack, without using alignment: AlignmentDirectional.center ===============
+
+        const Positioned.fill(		//
+          child: Center(
+            child: Text(
+              "This is testing a stack layout",
+              textAlign: TextAlign.center,		// 
+              style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+          ),
+        ),

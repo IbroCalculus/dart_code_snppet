@@ -1,0 +1,53 @@
+NB: CHECK ALSO Dialog.txt
+
+showDialog (equivalent of modal in web) is different from AlertDialog. 
+showDialog is a modal, a popup window where you can place any widget. whereas AlertDialog is one widget that is placed inside a showDialog
+You can place any widget inside a showDialog (CHECK Dialog.txt)
+
+In this snippet below, an AlertDialog is placed inside a showDialog (which is a modal)
+
+Aside AlertDialog widget, similarly, there is a Dialog widget and SimpleDialog widget.
+
+  Dialog           -> generic widget: Can be customized as needed
+  AlertDialog      -> specialized dialog widget (Has some prebuilt customizations. It gives: title, content, actions, spacing, layout)
+  SimpleDialog     -> specialized dialog widget
+
+
+The difference between AlertDialog and Dialog is that Dialog can be customized, You build everything yourself, 
+while AlertDialog has prebuilt styling. It gives you; title, content, actions, spacing, layout.
+
+-------- Hierarchy --------
+
+  showDialog()     -> function
+
+  Dialog           -> generic widget
+  AlertDialog      -> specialized dialog widget
+  SimpleDialog     -> specialized dialog widget
+
+
+  void showAlert(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ); 
+      },
+    );
+  }
+
+----------- Usage -------------------
+
+                  onPressed: () {
+                    showAlert(context, "Popup", "Added successfully!");
+                    setState(() {});
+                    },

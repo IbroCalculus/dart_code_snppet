@@ -1,0 +1,36 @@
+
+CHECK ALSO: Selectable text.txt - This allows highlighting and copy text, which Text() widget does not support.
+
+
+            // fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w100,
+
+There are 2 types of text widgets, ie Text and Text.rich.
+To use the Text.rich, check TextSpan.txt
+
+
+        child: Text(
+          "Simple Text. Once upon a time in the distance past",
+
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,	// E.g This is a sample text with some app...
+
+          style: TextStyle(
+            fontSize: 35,
+            color: Colors.green.shade800,
+            backgroundColor: Colors.yellow.shade100,
+            // fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w100,
+            fontStyle: FontStyle.italic,
+            letterSpacing: 5,
+            wordSpacing: 10
+          ),
+
+        ),
+      
+--------------- Using ternary if statement to display text on the Text widget -----------------
+
+List<PersonModel> people = [];
+
+              Text(people.isNotEmpty ? "people exist" : "No people", style: TextStyle(fontSize: 18, color: Colors.red),),

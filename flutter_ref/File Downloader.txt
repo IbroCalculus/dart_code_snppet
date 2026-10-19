@@ -1,0 +1,71 @@
+NB: Add permission. CHECK: Permision Handling.txt
+
+
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+
+  flutter_file_downloader: ^1.1.4
+
+  var path = "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg";
+
+  double? _progress;
+
+-----------------------	Elevated Button -----------------------
+
+            _progress != null
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: () {
+                      FileDownloader.downloadFile(
+                        url: path,
+                        onProgress: (name, progress) {
+                          setState(() {
+                            _progress = progress;
+                          });
+                        },
+                        onDownloadCompleted: (value) {
+                          setState(() {
+                            print("Value: $value");
+                            Fluttertoast.showToast(msg: "File Downloaded");
+                            _progress = null;
+                          });
+                        },
+                        onDownloadError: (errorMessage) {
+                          Fluttertoast.showToast(
+                              msg: "Failed to download, an error occurred");
+                        },
+                      );
+                    },
+                    child: Text("Download Content"),
+                  ),
+
+------------------------ Same as above, but (IconButton) ---------------------
+
+                          _progress != null
+                              ? CircularProgressIndicator()
+                              : IconButton(
+                                  onPressed: () {
+                                    FileDownloader.downloadFile(
+                                      url: path,
+                                      onProgress: (name, progress) {
+                                        setState(() {
+                                          _progress = progress;
+                                        });
+                                      },
+                                      onDownloadCompleted: (value) {
+                                        setState(() {
+                                          print("Value: $value");
+                                          Fluttertoast.showToast(
+                                              msg: "File Downloaded");
+                                          _progress = null;
+                                        });
+                                      },
+                                      onDownloadError: (errorMessage) {
+                                        Fluttertoast.showToast(
+                                            msg:
+                                                "Failed to download, an error occurred");
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(Icons.download))

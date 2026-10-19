@@ -1,0 +1,11 @@
+
+  lottie: ^3.3.1
+
+---------------- pubspec.yaml ---------------
+asset:
+  - assets/lottie/
+
+---------------- main.dart -------------------
+
+            Lottie.asset('assets/lotties/lottie_1.json', animate: true),
+            Lottie.asset('assets/lotties/lottie_1.json', animate: true, width: 200, height: 200, fit: BoxFit.contain),
