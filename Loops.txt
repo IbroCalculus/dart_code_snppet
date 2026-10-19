@@ -8,6 +8,14 @@
     print("This is iteration: ${i}");
   }
 
+====================== FOR-IN LOOP ==================
+
+List<String> names = ['Amina', 'Ibrahim', 'Fatima'];
+
+for (String name in names) {
+  print(name);
+}
+
 
 ================== WHILE LOOP ===================
 

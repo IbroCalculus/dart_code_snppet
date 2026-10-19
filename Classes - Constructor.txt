@@ -97,7 +97,7 @@ class User{
 
   factory User.usingFactory({required String userName, required String password}){
     if (password.length < 6){
-      String newPassword = "$password@*!%*";
+      String newPassword = "${password}@*!%*";
       return User(userName: userName, password: newPassword);
     }
     return User(userName: userName, password: password);

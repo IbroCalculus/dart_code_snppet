@@ -1,3 +1,4 @@
+CHECK: late_keyword.txt
 CHECK ALSO, Access Modifiers.txt
 
 NB: Const vs final:

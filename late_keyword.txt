@@ -1,0 +1,65 @@
+When you declare a variable, there are two separate ideas:
+    - Declaration: telling Dart that a variable exists and specifying its type.
+    - Initialization: giving that variable its first value.
+
+The keyword late has two closely related uses:
+    1. Deferred assignment: You declare a variable now and explicitly assign it later.
+    --------- Example ---------
+        void main() {
+            late String username;
+            print('Application started');
+            username = 'Amina';
+            print(username);
+        }
+
+
+    2. Lazy initialization: You give a variable an initializer, but Dart waits until the variable is first accessed before evaluating it.
+    --------- Example ---------
+    Imagine you have a function that performs an expensive operation.
+
+        String loadConfiguration() {
+            print('Loading configuration...');
+            return 'Production';
+        }
+
+
+    ----------- eager initialization -----------
+
+    Calling loadConfiguration() executes its body. In a real application, that function might parse a large configuration, construct an object, or perform another costly computation.
+
+    Suppose you write:
+        void main() {
+            final environment = loadConfiguration();
+
+            print('Application started');
+            print(environment);
+        }
+
+        The output is:
+            Loading configuration...
+            Application started
+            Production
+
+
+    ----------- Lazy initialization -----------
+
+        String loadConfiguration() {
+            print('Loading configuration...');
+            return 'Production';
+        }
+
+        void main() {
+            late final environment = loadConfiguration();
+
+            print('Application started');
+            print(environment);
+        }
+
+        The output is:
+            Application started
+            Loading configuration...
+            Production
+
+        late final environment = loadConfiguration(); does not immediately call loadConfiguration(). Instead, Dart waits until the first time you read environment.
+
+

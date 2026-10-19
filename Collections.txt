@@ -1,9 +1,10 @@
 A collection is an object that stores multiple values together.
+A collection is a data structure that stores or organizes multiple values. 
 
-Dart mainly has 3 built-in collections:
-- List (CHECK List.txt)
-- Map
-- Set
+Dart provides three particularly important collection types:
+  - List (CHECK List.txt): An ordered collection of items, accessed by their index.
+  - Map  (CHECK Map.txt): A collection of unique elements; duplicate values are not retained.
+  - Set  (CHECK Set.txt): Stores key-value pairs, allowing you to look up a value using its key.
 
 
 

@@ -81,6 +81,13 @@ String welcome({int? age, required String fName, required String sName}) {
 
 
 
+============================== ARROW FUNCTION ===========================
+
+int square(int number) => number * number;
+print(square(5));
+
+
+
 ================================== RETURNING A FUNCTION IN A FUNCTION ====================
 
 void main() {
