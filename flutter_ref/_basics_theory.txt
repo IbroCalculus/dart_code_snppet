@@ -62,7 +62,7 @@ Flutter is a declarative, multi-platform UI framework written in Dart; heavily s
 
 
 
-===================== The three major parts of Flutter =====================
+===================== The major parts of Flutter =====================
 ----- Flutter framework -------
 This is the collection of Dart libraries you primarily work with. It includes widgets, layout, gestures, animation, Material and Cupertino components, and other UI facilities.
 When you write Scaffold(...), Column(...), or setState(...), you are working with framework APIs.
@@ -70,6 +70,23 @@ When you write Scaffold(...), Column(...), or setState(...), you are working wit
 ------ Flutter engine -------
 The engine handles lower-level work such as graphics rendering, text processing, and communicating with the framework. It includes components for drawing the interface and coordinating with the underlying platform.
 You rarely interact with the engine directly when developing ordinary Flutter applications.
+
+
+------ Flutter SDK --------
+SDK stands for Software Development Kit. The Flutter SDK contains the Flutter framework, command-line tools and other components needed to develop and build Flutter applications. It also provides the associated Dart SDK.
+Think: the development kit you install on your computer.
+
+------ Renderer --------
+A renderer is responsible for turning graphical descriptions into visible output. In Flutter, rendering involves the framework's rendering objects and the engine's graphics capabilities.
+Think: the system that helps turn layout and drawing instructions into pixels.
+
+------ Compiler --------
+A compiler translates program code from one representation into another. Flutter's Dart toolchain uses different compilation strategies depending on the target and build mode.
+Think: a translator used in preparing or executing your program.
+
+------ Runtime --------
+The environment and supporting mechanisms in which program instructions execute. Dart's runtime support differs depending on how the application is compiled and where it runs.
+Think: the execution environment for your program.
 
 ------ Embedder --------
 The embedder connects the Flutter engine to its host operating system. It handles platform-specific responsibilities such as setting up the application surface, event integration, and coordinating with the operating system.
